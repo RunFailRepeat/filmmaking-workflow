@@ -12,13 +12,21 @@ For new identity references, prefer a clean background without labels or competi
 
 ## 3. Plan shots and transitions
 
+Apply the [voice, camera and finishing gates](CONTINUITY.md). Audition voices per film; approve each character's exact user-heard take/source version as well as provider/ID/type, accent, pronunciation and delivery. No automatic voice reuse or assumed preset/image voice preservation. Keep exact dialogue per line.
+
 Specify camera position/movement, lens or field of view, lighting/look and output aspect ratio. Record exact dialogue plus timing, tone, pacing and pronunciation. Keep these explicit even when references provide appearance.
+
+Also specify framing, focus/depth of field and reshoot continuity. Lens/focal-length descriptions are visual intent, not guaranteed physical optics. Match approved intent or explicitly approve deviations and check actual footage across cuts.
 
 Give every shot a purpose, source duration, usable edit range, start/action/end, camera side, screen direction and sound. Carry momentum, pose, eyelines, object states and support contacts across cuts. Distinguish simultaneous coverage from sequential story time: two angles of one event do not double its story duration.
 
 Use separate coverage when a complicated contact cannot be judged clearly. Multishot scenes are acceptable when geometry and timing remain manageable.
 
+For sequential generated clips, carry the prior ending's character positions/poses/action, props and environment into the next shot without automatically fixing its opening composition. Default to an intentional new angle or meaningful shot-size change, preserving screen direction, eyelines, the 180-degree axis and timing. Avoid tiny camera shifts, duplicated action and frozen overlap. Record outgoing state, incoming angle/cut plan and optional match-on-action/edit handles. State-reference binding is different from literal fixed start-frame conditioning: use supported alternative reference modes/coverage or verified trim handles when a provider forces the first frame. A continuous-shot exception must be explicit. Review the actual seam at normal speed for pose/action/voice/sound before accepting it.
+
 ## 4. Review the exact submission
+
+For every shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.
 
 Show the exact prompt, actual reference order, supported binding syntax, provider/model/mode, duration, resolution, audio and count. Describe action and physical cause/effect rather than repeating every visual trait. Assess READY / NEEDS DESIGN / HIGH RISK and define indispensable usable seconds.
 
@@ -39,6 +47,10 @@ Classify ACCEPT / KEEP FRAGMENT / EDIT REPAIR / REPLACE, with source in/out rang
 Useful editorial options include a tighter insert crop when a missing offscreen character need not be visible, a shorter action beat that keeps the valid contact, or a distinctly different angle when near-matching camera positions create a jump. Check geography, story meaning, resolution and continuity after each repair; never claim a crop restored an absent interaction.
 
 ## 7. Finish and authorize release separately
+
+After picture/edit approval, record grading, sharpening and upscale settings, exact source and output versions, operation approval and fresh approval for any paid work. Compare the actual enhanced export against approved source identity/faces, artifacts/detail, crop, continuity, timing and audio. Keep the original and editable project.
+
+Listen to every line of the actual final export for voice AND accent, exact words/pronunciation/delivery, unclipped timing, sync, other speakers and ambience. ASR is not listening. If listening is unavailable, mark it unverified and retain the owner review gate; do not claim a pass. Enhanced or re-exported media needs its own review.
 
 Review the real export, first/last frames, crop, borders, exact dialogue, audio and credits. Preserve originals and editable project files externally. Confirm rights and approve the exact output, destination, accompanying text and timing before publication.
 

@@ -17,5 +17,13 @@
   "source_seconds": 6,
   "edit_seconds": 4,
   "review_coverage": "none",
-  "status": "proposal"
+  "status": "proposal",
+  "framing": "Counter-height medium insert",
+  "focus_depth_of_field": "Cup and hand sharp; soft background",
+  "movement": "Locked camera",
+  "reshoot_continuity": "Match approved 50mm-equivalent look, framing, focus and movement; record owner-approved exceptions",
+  "outgoing_endpoint_state": "Cup stationary, hand withdrawing; counter and daylight unchanged",
+  "incoming_angle_size": "Distinct close insert from same side of action axis",
+  "cut_plan": "Cut during hand withdrawal; do not repeat cup placement",
+  "match_action_edit_handles": "Optional moving handles around withdrawal; verify footage before trimming"
 }

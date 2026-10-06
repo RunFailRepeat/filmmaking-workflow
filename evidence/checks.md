@@ -2,9 +2,14 @@
 
 Checked 2026-10-06 with Python 3 standard library only.
 
-- python -m unittest discover -s tests -v: 10 tests passed.
+- python -m unittest discover -s tests -v: 29 tests passed.
 - python validate_shot.py examples/fictional-shot.json: metadata valid.
 - The unfilled Markdown template is expected to fail check_packet.py readiness.
+- The fictional continuity packet conforms to the bundled shape but intentionally fails preflight/enhancement/release approval gates. No actual audio or export exists.
+
+Continuity tests cover invented consistent records, missing audio/voice data, unapproved/unheard takes, changed take/type/version, per-film auditions, reordered bindings, unsupported routes, missing payload review, direct-edit plans and replacement completion, removed/changed audio, lens/framing/focus/movement changes, accent/word/take mismatches, ASR/unavailable listening, every line and audio check, stale export review, picture/edit and paid enhancement approval, exact enhanced-export comparison and retention. Positive fixtures are fabricated declarations, not real approvals or production results.
+
+Transition tests reject tiny/identical sequential cuts unless an explicit approved continuous-shot exception applies; fixed-start-frame assumptions require supported alternative coverage or verified trim handles. Normal-speed seam review must target the actual export, with pose/action/voice/sound/timing and no-duplicate/no-frozen-overlap checks. No footage was generated or watched for these tests.
 
 Coverage: missing fields/approvals, duplicate approval fields, nonfinite duration, unresolved ending, edit-range overrun, missing camera and invalid review coverage. The example is newly invented, not a private production shot or generated result.
 

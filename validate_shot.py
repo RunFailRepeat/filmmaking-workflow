@@ -5,7 +5,9 @@ import sys
 from pathlib import Path
 
 TEXT = ("shot_id purpose camera lens look aspect_ratio dialogue delivery "
-        "start_state action end_state eyelines prop_state reference_ids payload_version").split()
+        "start_state action end_state eyelines prop_state reference_ids payload_version "
+        "framing focus_depth_of_field movement reshoot_continuity "
+        "outgoing_endpoint_state incoming_angle_size cut_plan match_action_edit_handles").split()
 def validate(d):
     if not isinstance(d, dict):
         return ["shot must be an object"]

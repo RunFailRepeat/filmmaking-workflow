@@ -21,7 +21,15 @@
     "source_seconds",
     "edit_seconds",
     "review_coverage",
-    "status"
+    "status",
+    "framing",
+    "focus_depth_of_field",
+    "movement",
+    "reshoot_continuity",
+    "outgoing_endpoint_state",
+    "incoming_angle_size",
+    "cut_plan",
+    "match_action_edit_handles"
   ],
   "properties": {
     "shot_id": {
@@ -122,6 +130,38 @@
         "generated",
         "reviewed"
       ]
+    },
+    "framing": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "focus_depth_of_field": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "movement": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "reshoot_continuity": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "outgoing_endpoint_state": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "incoming_angle_size": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "cut_plan": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "match_action_edit_handles": {
+      "type": "string",
+      "pattern": "\\S"
     }
   }
 }

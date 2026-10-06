@@ -7,6 +7,7 @@ A reference-first planning and review kit for AI-assisted shorts. It helps defin
 - [Packet checker](check_packet.py)
 - [Check evidence](evidence/checks.md)
 - [Reusable shot JSON schema](schemas/shot.schema.json) and [fictional example](examples/fictional-shot.json)
+- [Voice, camera and finishing gates](CONTINUITY.md), [continuity schema](schemas/continuity.schema.json), [fictional packet](examples/fictional-continuity.json) and [recorded-evidence validator](validate_continuity.py)
 
 ## Run the checks
 
@@ -16,9 +17,10 @@ Python 3 standard library only. Review the scripts before execution.
 python -m unittest discover -s tests -v
 python check_packet.py templates/production.md
 python validate_shot.py examples/fictional-shot.json
+python validate_continuity.py examples/fictional-continuity.json preflight
 ```
 
-The template intentionally fails readiness because required fields are unresolved. Fill a copy outside this public repository. The checker checks explicit fields and approval markers, not creative quality, rights validity or authorization authenticity.
+The templates intentionally fail readiness because fields or approvals are unresolved. Fill a copy outside this public repository. The continuity validator has preflight, enhancement and release stages. It checks declared voice/take bindings, camera changes, final-listening records and enhancement approvals; it never listens to media or authenticates approvals. The basic packet checker checks explicit fields and approval markers, not creative quality or rights validity.
 
 ## Status and scope
 

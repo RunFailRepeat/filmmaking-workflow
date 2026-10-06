@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shot metadata (does not authenticate approvals)",
+  "type": "object",
+  "required": [
+    "shot_id",
+    "purpose",
+    "camera",
+    "lens",
+    "look",
+    "aspect_ratio",
+    "dialogue",
+    "delivery",
+    "start_state",
+    "action",
+    "end_state",
+    "eyelines",
+    "prop_state",
+    "reference_ids",
+    "payload_version",
+    "source_seconds",
+    "edit_seconds",
+    "review_coverage",
+    "status"
+  ],
+  "properties": {
+    "shot_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "camera": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "lens": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "look": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "aspect_ratio": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "dialogue": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "delivery": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "start_state": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "end_state": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "eyelines": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "prop_state": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "reference_ids": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "payload_version": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "source_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "edit_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "review_coverage": {
+      "enum": [
+        "none",
+        "sampled_frames",
+        "full_motion",
+        "full_motion_and_audio"
+      ]
+    },
+    "status": {
+      "enum": [
+        "proposal",
+        "approved",
+        "generated",
+        "reviewed"
+      ]
+    }
+  }
+}

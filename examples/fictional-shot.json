@@ -1,0 +1,21 @@
+{
+  "shot_id": "fictional-cup-01",
+  "purpose": "Show a fictional adult performer placing a plain cup on a counter",
+  "camera": "Locked medium insert; counter-height",
+  "lens": "50mm equivalent proposal",
+  "look": "Soft neutral daylight; natural contrast",
+  "aspect_ratio": "16:9",
+  "dialogue": "All set.",
+  "delivery": "Calm spoken delivery after cup contacts counter",
+  "start_state": "Cup held above counter",
+  "action": "Lower cup until base contacts counter, release, withdraw hand",
+  "end_state": "Cup stationary; hand clear",
+  "eyelines": "Gaze follows cup; same screen side across cuts",
+  "prop_state": "Plain cup remains upright",
+  "reference_ids": "SYNTHETIC-PLACEHOLDER-NO-ASSET",
+  "payload_version": "fictional-v1",
+  "source_seconds": 6,
+  "edit_seconds": 4,
+  "review_coverage": "none",
+  "status": "proposal"
+}

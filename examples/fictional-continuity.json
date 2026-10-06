@@ -84,7 +84,8 @@
   "audio": {
     "state": "unchanged",
     "replacement_approved": false,
-    "export_version": "fictional-review-v1"
+    "export_version": "fictional-review-v1",
+    "export_asset_id": "fictional-export-asset-v1"
   },
   "review": {
     "export_version": "fictional-review-v1",
@@ -108,10 +109,20 @@
           "other_speakers": "unverified",
           "ambience": "unverified",
           "pronunciation": "unverified",
-          "delivery": "unverified"
+          "delivery": "unverified",
+          "sound_effects": "unverified"
+        },
+        "export_range": {
+          "start_seconds": 2,
+          "end_seconds": 4
         }
       }
-    ]
+    ],
+    "listener_id": "UNVERIFIED",
+    "listened_at": "UNVERIFIED",
+    "listened_source_id": "fictional-export-asset-v1",
+    "duration_seconds": 4,
+    "listened_ranges": []
   },
   "enhancement": {
     "requested": false,
@@ -172,7 +183,13 @@
       "sound": "unverified",
       "timing": "unverified",
       "no_duplicated_action": "unverified",
-      "no_frozen_overlap": "unverified"
+      "no_frozen_overlap": "unverified",
+      "incoming_angle_shot_size": "unverified",
+      "axis_180": "unverified",
+      "screen_direction": "unverified",
+      "eyelines": "unverified",
+      "props_environment": "unverified",
+      "sound_effects": "unverified"
     }
   }
 }

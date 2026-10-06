@@ -24,6 +24,8 @@ Use separate coverage when a complicated contact cannot be judged clearly. Multi
 
 For sequential generated clips, carry the prior ending's character positions/poses/action, props and environment into the next shot without automatically fixing its opening composition. Default to an intentional new angle or meaningful shot-size change, preserving screen direction, eyelines, the 180-degree axis and timing. Avoid tiny camera shifts, duplicated action and frozen overlap. Record outgoing state, incoming angle/cut plan and optional match-on-action/edit handles. State-reference binding is different from literal fixed start-frame conditioning: use supported alternative reference modes/coverage or verified trim handles when a provider forces the first frame. A continuous-shot exception must be explicit. Review the actual seam at normal speed for pose/action/voice/sound before accepting it.
 
+Record actual seam pass/fail/unverified findings for incoming angle/shot size, 180-degree axis, screen direction, eyelines, props/environment and sound-effect preservation; planned intent alone is not review evidence. Continuous-shot exceptions still require findings against the approved continuous intention.
+
 ## 4. Review the exact submission
 
 For every shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.
@@ -51,6 +53,8 @@ Useful editorial options include a tighter insert crop when a missing offscreen 
 After picture/edit approval, record grading, sharpening and upscale settings, exact source and output versions, operation approval and fresh approval for any paid work. Compare the actual enhanced export against approved source identity/faces, artifacts/detail, crop, continuity, timing and audio. Keep the original and editable project.
 
 Listen to every line of the actual final export for voice AND accent, exact words/pronunciation/delivery, unclipped timing, sync, other speakers and ambience. ASR is not listening. If listening is unavailable, mark it unverified and retain the owner review gate; do not claim a pass. Enhanced or re-exported media needs its own review.
+
+Record the actual listener, timezone-qualified listening date/time, exact export asset/version, duration, listened time ranges and each line's export range. Listen through the entire export, including sound effects and ambience between lines. Sound-effect preservation requires its own result, separate from ambience. Missing provenance, incomplete listening coverage or unresolved results block recorded release readiness.
 
 Review the real export, first/last frames, crop, borders, exact dialogue, audio and credits. Preserve originals and editable project files externally. Confirm rights and approve the exact output, destination, accompanying text and timing before publication.
 

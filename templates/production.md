@@ -43,6 +43,8 @@ reference_for_state_or_fixed_start_frame: TBD
 fixed_frame_supported_alternative_or_verified_trim_handles: TBD
 explicit_continuous_shot_exception: NOT GRANTED
 actual_seam_normal_speed_pose_action_voice_sound_review: UNVERIFIED
+actual_seam_angle_size_axis_direction_eyelines_props_environment_checks: UNVERIFIED
+actual_seam_sound_effects_preservation: UNVERIFIED
 
 ## Character voice lock and actual payload
 
@@ -68,8 +70,14 @@ Defects and smallest repair:
 Publication approval: NOT GRANTED
 
 Actual final export version:
+Actual final export asset ID and duration (seconds):
+Actual listener ID and timezone-qualified listening date/time: UNVERIFIED
+Exact listened source asset ID (must match final export):
+Listened export-relative time ranges (full export, including effects/ambience):
+Per-line export-relative start/end ranges:
 Direct listening coverage for EVERY line: UNVERIFIED
 Per line: approved take/version; heard voice AND accent; exact words/pronunciation/delivery; unclipped timing; sync; other speakers; ambience:
+Per-line sound-effect preservation (separate from ambience): UNVERIFIED
 Owner listening review gate: OPEN
 ASR/transcript evidence is not listening. If unable to listen, retain UNVERIFIED status and owner review gate.
 

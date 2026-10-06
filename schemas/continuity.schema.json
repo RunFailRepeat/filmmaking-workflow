@@ -387,12 +387,17 @@
         "export_version": {
           "type": "string",
           "pattern": "\\S"
+        },
+        "export_asset_id": {
+          "type": "string",
+          "pattern": "\\S"
         }
       },
       "required": [
         "state",
         "replacement_approved",
-        "export_version"
+        "export_version",
+        "export_asset_id"
       ],
       "additionalProperties": false
     },
@@ -510,6 +515,13 @@
                       "fail",
                       "unverified"
                     ]
+                  },
+                  "sound_effects": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
                   }
                 },
                 "required": [
@@ -521,7 +533,26 @@
                   "other_speakers",
                   "ambience",
                   "pronunciation",
-                  "delivery"
+                  "delivery",
+                  "sound_effects"
+                ],
+                "additionalProperties": false
+              },
+              "export_range": {
+                "type": "object",
+                "properties": {
+                  "start_seconds": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "end_seconds": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "start_seconds",
+                  "end_seconds"
                 ],
                 "additionalProperties": false
               }
@@ -533,11 +564,49 @@
               "source_version",
               "heard_accent",
               "heard_words",
-              "checks"
+              "checks",
+              "export_range"
             ],
             "additionalProperties": false
           },
           "minItems": 0
+        },
+        "listener_id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "listened_at": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "listened_source_id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "listened_ranges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start_seconds": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end_seconds": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "start_seconds",
+              "end_seconds"
+            ],
+            "additionalProperties": false
+          }
         }
       },
       "required": [
@@ -545,7 +614,12 @@
         "method",
         "actual_export_listened",
         "owner_review_pending",
-        "lines"
+        "lines",
+        "listener_id",
+        "listened_at",
+        "listened_source_id",
+        "duration_seconds",
+        "listened_ranges"
       ],
       "additionalProperties": false
     },
@@ -853,6 +927,48 @@
                 "fail",
                 "unverified"
               ]
+            },
+            "incoming_angle_shot_size": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "axis_180": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "screen_direction": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "eyelines": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "props_environment": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "sound_effects": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
             }
           },
           "required": [
@@ -862,7 +978,13 @@
             "sound",
             "timing",
             "no_duplicated_action",
-            "no_frozen_overlap"
+            "no_frozen_overlap",
+            "incoming_angle_shot_size",
+            "axis_180",
+            "screen_direction",
+            "eyelines",
+            "props_environment",
+            "sound_effects"
           ],
           "additionalProperties": false
         }

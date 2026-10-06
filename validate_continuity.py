@@ -1,21 +1,28 @@
 """Offline checks of recorded evidence, never a media listener or approval authority."""
 import json
+import math
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 
 SCHEMA = Path(__file__).parent / "schemas/continuity.schema.json"
-AUDIO_CHECKS = ("voice", "accent", "words", "pronunciation", "delivery", "unclipped_timing", "sync", "other_speakers", "ambience")
+AUDIO_CHECKS = ("voice", "accent", "words", "pronunciation", "delivery", "unclipped_timing", "sync", "other_speakers", "ambience", "sound_effects")
 ENHANCEMENT_CHECKS = ("identity", "faces", "artifacts", "detail", "crop", "continuity", "timing", "audio")
 
 
 def shape(value, spec, path="$", errors=None):
     """Validate the small keyword subset used by our bundled schema, not arbitrary schemas."""
     errors = [] if errors is None else errors
-    types = {"object": dict, "array": list, "string": str, "boolean": bool}
+    types = {"object": dict, "array": list, "string": str, "boolean": bool, "number": (int, float)}
     if "type" in spec and not isinstance(value, types[spec["type"]]):
         errors.append(path + ": invalid type")
         return errors
+    if spec.get("type") == "number":
+        if isinstance(value, bool) or not math.isfinite(value):
+            errors.append(path + ": finite number required")
+        elif ("minimum" in spec and value < spec["minimum"]) or ("exclusiveMinimum" in spec and value <= spec["exclusiveMinimum"]):
+            errors.append(path + ": outside numeric bounds")
     if "enum" in spec and value not in spec["enum"]:
         errors.append(path + ": invalid enum")
     if isinstance(value, str) and "pattern" in spec and not re.search(spec["pattern"], value):
@@ -114,8 +121,28 @@ def validate(d, stage="preflight"):
     require(review["method"] == "direct_listen" and not review["owner_review_pending"],
             "listening unverified; owner review gate remains open (ASR is not listening)")
     require(review["actual_export_listened"], "actual final export has not been listened to")
+    require(review["listener_id"].strip().lower() not in ("unverified", "unknown", "tbd", "pending", "none"),
+            "actual listener identity required")
+    try:
+        listened_at = datetime.fromisoformat(review["listened_at"].replace("Z", "+00:00"))
+        require(listened_at.utcoffset() is not None, "listening timestamp must include timezone")
+    except ValueError:
+        require(False, "valid listening timestamp required")
+    require(review["listened_source_id"] == audio["export_asset_id"], "listened source does not identify actual export asset")
+    duration = review["duration_seconds"]
+    ranges = review["listened_ranges"]
+    require(bool(ranges), "actual listened time ranges required")
+    covered_until = 0
+    for interval in sorted(ranges, key=lambda r: r["start_seconds"]):
+        start, end = interval["start_seconds"], interval["end_seconds"]
+        require(start < end <= duration, "invalid listened range for export duration")
+        require(start <= covered_until, "listening coverage gap in final export")
+        covered_until = max(covered_until, end)
+    require(covered_until == duration, "listening must cover full export including sound effects and ambience")
     require([r["line_id"] for r in review["lines"]] == ids, "final listening must cover every line in order")
     for line, heard in zip(d["lines"], review["lines"]):
+        span = heard["export_range"]
+        require(span["start_seconds"] < span["end_seconds"] <= duration, "invalid dialogue range in actual export")
         voice = voices.get(line["character_id"])
         if voice:
             require(heard["character_id"] == line["character_id"] and

@@ -11,6 +11,8 @@ def fixture():
     d["voices"][0].update(owner_approved=True, user_heard=True)
     d["submission"]["actual_payload_reviewed"] = True
     d["review"].update(method="direct_listen", actual_export_listened=True, owner_review_pending=False)
+    d["review"].update(listener_id="synthetic-reviewer", listened_at="2026-10-06T20:00:00Z",
+                        listened_ranges=[{"start_seconds": 0, "end_seconds": 4}])
     heard = d["review"]["lines"][0]
     heard.update(heard_accent=d["voices"][0]["accent"], heard_words=d["lines"][0]["exact_dialogue"])
     heard["checks"] = dict.fromkeys(heard["checks"], "pass")
@@ -177,3 +179,59 @@ class ContinuityChecks(unittest.TestCase):
         self.assertTrue(validate(d, "release"))
         d = fixture(); d["transition"]["seam_export_version"] = "stale"
         self.assertTrue(validate(d, "release"))
+
+    def test_actual_spatial_seam_checks_required(self):
+        for key in ("incoming_angle_shot_size", "axis_180", "screen_direction", "eyelines", "props_environment", "sound_effects"):
+            for value in ("fail", "unverified", None):
+                d = fixture()
+                if value is None:
+                    del d["transition"]["checks"][key]
+                else:
+                    d["transition"]["checks"][key] = value
+                self.assertTrue(validate(d, "release"), (key, value))
+
+    def test_continuous_exception_still_requires_actual_seam_review(self):
+        d = fixture(); t = d["transition"]
+        t.update(intent="continuous", composition_change="identical", continuous_exception_approved=True)
+        self.assertEqual(validate(d, "release"), [])
+        t["checks"]["incoming_angle_shot_size"] = "unverified"
+        self.assertTrue(validate(d, "release"))
+
+    def test_listener_source_and_timestamp_provenance(self):
+        for key, value in (("listener_id", "UNVERIFIED"), ("listener_id", "  "),
+                           ("listened_at", "not-a-date"), ("listened_at", "2026-10-06T20:00:00"),
+                           ("listened_source_id", "old-export-asset")):
+            d = fixture(); d["review"][key] = value
+            self.assertTrue(validate(d, "release"), (key, value))
+        for key in ("listener_id", "listened_at", "listened_source_id", "listened_ranges", "duration_seconds"):
+            d = fixture(); del d["review"][key]
+            self.assertTrue(validate(d, "release"), key)
+
+    def test_listened_ranges_cover_actual_export(self):
+        d = fixture()
+        d["review"]["listened_ranges"] = [{"start_seconds": 0, "end_seconds": 2}, {"start_seconds": 2, "end_seconds": 4}]
+        self.assertEqual(validate(d, "release"), [])
+        for ranges in ([], [(2, 4)], [(0, 2), (3, 4)], [(0, 5)], [(2, 1)], [(0, 0)],
+                       [(-1, 4)], [(False, 4)], [(0, float("inf"))], [(0, float("nan"))]):
+            d = fixture(); d["review"]["listened_ranges"] = [{"start_seconds": a, "end_seconds": b} for a, b in ranges]
+            self.assertTrue(validate(d, "release"), ranges)
+
+    def test_dialogue_ranges_and_export_duration(self):
+        for span in ({"start_seconds": 2, "end_seconds": 5}, {"start_seconds": 3, "end_seconds": 2}):
+            d = fixture(); d["review"]["lines"][0]["export_range"] = span
+            self.assertTrue(validate(d, "release"))
+        d = fixture(); del d["review"]["lines"][0]["export_range"]
+        self.assertTrue(validate(d, "release"))
+        for duration in (0, -1, True, float("nan"), float("inf")):
+            d = fixture(); d["review"]["duration_seconds"] = duration
+            self.assertTrue(validate(d, "release"), duration)
+
+    def test_sound_effects_are_distinct_from_ambience(self):
+        for value in ("fail", "unverified", None):
+            d = fixture()
+            if value is None:
+                del d["review"]["lines"][0]["checks"]["sound_effects"]
+            else:
+                d["review"]["lines"][0]["checks"]["sound_effects"] = value
+            self.assertEqual(d["review"]["lines"][0]["checks"]["ambience"], "pass")
+            self.assertTrue(validate(d, "release"))

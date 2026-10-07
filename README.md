@@ -3,6 +3,7 @@
 A reference-first planning and review kit for AI-assisted shorts. It helps define shots, preserve continuity, review actual footage and control approvals. It does not generate media or authorize spending.
 
 - [Workflow](WORKFLOW.md)
+- [Content analytics definitions and exploratory timing proposal](ANALYTICS.md)
 - [Production packet template](templates/production.md)
 - [Packet checker](check_packet.py)
 - [Check evidence](evidence/checks.md)

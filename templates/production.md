@@ -45,6 +45,11 @@ explicit_continuous_shot_exception: NOT GRANTED
 actual_seam_normal_speed_pose_action_voice_sound_review: UNVERIFIED
 actual_seam_angle_size_axis_direction_eyelines_props_environment_checks: UNVERIFIED
 actual_seam_sound_effects_preservation: UNVERIFIED
+story_action_sequential: TBD
+has_edited_seam_including_simultaneous_coverage: TBD
+seam_reviewer_and_timezone_timestamp: UNVERIFIED
+seam_export_asset_version_range_and_cut_seconds: UNVERIFIED
+outgoing_and_incoming_source_assets_versions_durations_reviewed_ranges: UNVERIFIED
 
 ## Character voice lock and actual payload
 
@@ -56,6 +61,7 @@ Line IDs / exact dialogue / playback order:
 Actual shot or reshoot payload version:
 Supported ordered voice/audio bindings inspected:
 If unsupported, approved direct-edit plan (takes, lines, ranges, sync, ambience):
+Complete actual timing and instructions; placeholder markers do not pass preflight.
 Audio state (unchanged / removed / changed / replaced):
 Replacement installed and approved: NOT VERIFIED
 
@@ -75,6 +81,7 @@ Actual listener ID and timezone-qualified listening date/time: UNVERIFIED
 Exact listened source asset ID (must match final export):
 Listened export-relative time ranges (full export, including effects/ambience):
 Per-line export-relative start/end ranges:
+Keep declared line starts in playback order; overlapping/equal starts are allowed.
 Direct listening coverage for EVERY line: UNVERIFIED
 Per line: approved take/version; heard voice AND accent; exact words/pronunciation/delivery; unclipped timing; sync; other speakers; ambience:
 Per-line sound-effect preservation (separate from ambience): UNVERIFIED

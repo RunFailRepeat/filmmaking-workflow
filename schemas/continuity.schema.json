@@ -543,11 +543,13 @@
                 "properties": {
                   "start_seconds": {
                     "type": "number",
-                    "minimum": 0
+                    "minimum": 0,
+                    "maximum": 1.7976931348623157e+308
                   },
                   "end_seconds": {
                     "type": "number",
-                    "exclusiveMinimum": 0
+                    "exclusiveMinimum": 0,
+                    "maximum": 1.7976931348623157e+308
                   }
                 },
                 "required": [
@@ -585,7 +587,8 @@
         },
         "duration_seconds": {
           "type": "number",
-          "exclusiveMinimum": 0
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
         },
         "listened_ranges": {
           "type": "array",
@@ -594,11 +597,13 @@
             "properties": {
               "start_seconds": {
                 "type": "number",
-                "minimum": 0
+                "minimum": 0,
+                "maximum": 1.7976931348623157e+308
               },
               "end_seconds": {
                 "type": "number",
-                "exclusiveMinimum": 0
+                "exclusiveMinimum": 0,
+                "maximum": 1.7976931348623157e+308
               }
             },
             "required": [
@@ -987,6 +992,156 @@
             "sound_effects"
           ],
           "additionalProperties": false
+        },
+        "has_edited_seam": {
+          "type": "boolean"
+        },
+        "seam_review": {
+          "type": "object",
+          "properties": {
+            "reviewer_id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "reviewed_at": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "export_asset_id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "export_version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "export_range": {
+              "type": "object",
+              "properties": {
+                "start_seconds": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "end_seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                }
+              },
+              "required": [
+                "start_seconds",
+                "end_seconds"
+              ],
+              "additionalProperties": false
+            },
+            "cut_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1.7976931348623157e+308
+            },
+            "outgoing_source": {
+              "type": "object",
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "duration_seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "start_seconds": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    },
+                    "end_seconds": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    }
+                  },
+                  "required": [
+                    "start_seconds",
+                    "end_seconds"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "asset_id",
+                "version",
+                "duration_seconds",
+                "range"
+              ],
+              "additionalProperties": false
+            },
+            "incoming_source": {
+              "type": "object",
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "duration_seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "start_seconds": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    },
+                    "end_seconds": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    }
+                  },
+                  "required": [
+                    "start_seconds",
+                    "end_seconds"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "asset_id",
+                "version",
+                "duration_seconds",
+                "range"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "reviewer_id",
+            "reviewed_at",
+            "export_asset_id",
+            "export_version",
+            "export_range",
+            "cut_seconds",
+            "outgoing_source",
+            "incoming_source"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
@@ -1008,7 +1163,9 @@
         "provider_alternative_supported",
         "trim_handles_verified",
         "normal_speed_reviewed",
-        "checks"
+        "checks",
+        "has_edited_seam",
+        "seam_review"
       ],
       "additionalProperties": false
     }

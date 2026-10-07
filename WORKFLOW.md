@@ -26,6 +26,8 @@ For sequential generated clips, carry the prior ending's character positions/pos
 
 Record actual seam pass/fail/unverified findings for incoming angle/shot size, 180-degree axis, screen direction, eyelines, props/environment and sound-effect preservation; planned intent alone is not review evidence. Continuous-shot exceptions still require findings against the approved continuous intention.
 
+Edited-seam presence is independent of sequential versus simultaneous story time. Record the seam reviewer/date, exact export/cut/range and outgoing/incoming source versions/ranges for every join. Continuous-shot exceptions do not waive the approved voice take or listening evidence. Preserve overlapping dialogue while recording line starts in actual playback order. Complete direct-edit timing/instructions before preflight; unresolved placeholders are not an approved plan.
+
 ## 4. Review the exact submission
 
 For every shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.

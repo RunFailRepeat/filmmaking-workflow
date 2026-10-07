@@ -19,6 +19,7 @@ def fixture():
     d["enhancement"].update(original_retained=True, editable_retained=True)
     d["release"]["owner_approved"] = True
     d["transition"]["normal_speed_reviewed"] = True
+    d["transition"]["seam_review"].update(reviewer_id="synthetic-reviewer", reviewed_at="2026-10-06T20:00:00Z")
     d["transition"]["checks"] = dict.fromkeys(d["transition"]["checks"], "pass")
     return d
 
@@ -136,6 +137,7 @@ class ContinuityChecks(unittest.TestCase):
         for key in ("audio", "review", "release"):
             d[key]["export_version"] = e["output_version"]
         d["transition"]["seam_export_version"] = e["output_version"]
+        d["transition"]["seam_review"]["export_version"] = e["output_version"]
         self.assertEqual(validate(d, "release"), [])
         for key in e["checks"]:
             changed = copy.deepcopy(d); changed["enhancement"]["checks"][key] = "unverified"

@@ -190,6 +190,36 @@
       "eyelines": "unverified",
       "props_environment": "unverified",
       "sound_effects": "unverified"
+    },
+    "has_edited_seam": true,
+    "seam_review": {
+      "reviewer_id": "UNVERIFIED",
+      "reviewed_at": "UNVERIFIED",
+      "export_asset_id": "fictional-export-asset-v1",
+      "export_version": "fictional-review-v1",
+      "export_range": {
+        "start_seconds": 1,
+        "end_seconds": 3
+      },
+      "cut_seconds": 2,
+      "outgoing_source": {
+        "asset_id": "fictional-outgoing-clip",
+        "version": "fictional-outgoing-v1",
+        "duration_seconds": 6,
+        "range": {
+          "start_seconds": 4,
+          "end_seconds": 6
+        }
+      },
+      "incoming_source": {
+        "asset_id": "fictional-incoming-clip",
+        "version": "fictional-incoming-v1",
+        "duration_seconds": 6,
+        "range": {
+          "start_seconds": 0,
+          "end_seconds": 2
+        }
+      }
     }
   }
 }

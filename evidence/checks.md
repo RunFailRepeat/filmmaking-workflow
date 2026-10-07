@@ -1,8 +1,8 @@
 # Reproducible check evidence
 
-Checked 2026-10-06 with Python 3 standard library only.
+Checked 2026-10-07 with Python 3 standard library only.
 
-- python -m unittest discover -s tests -v: 35 tests passed.
+- python -m unittest discover -s tests -v: 44 tests passed.
 - python validate_shot.py examples/fictional-shot.json: metadata valid.
 - The unfilled Markdown template is expected to fail check_packet.py readiness.
 - The fictional continuity packet conforms to the bundled shape but intentionally fails preflight/enhancement/release approval gates. No actual audio or export exists.
@@ -18,3 +18,5 @@ Coverage: missing fields/approvals, duplicate approval fields, nonfinite duratio
 Schema string patterns are also checked against the fictional field values and whitespace-only input. This regression check uses the patterns loaded from the actual JSON schema; the existing non-whitespace patterns passed unchanged.
 
 Source review: scripts read text/JSON and print diagnostics; no network, dependencies, subprocesses, writes, billing or model execution. No actual footage was reviewed. These checks cannot authenticate approvals, prove rights or judge cinematography.
+
+See [bounded correction reproductions](corrections-2026-10-07.md) for verified before/after behavior, compatibility and risks.

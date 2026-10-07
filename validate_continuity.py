@@ -9,6 +9,18 @@ from pathlib import Path
 SCHEMA = Path(__file__).parent / "schemas/continuity.schema.json"
 AUDIO_CHECKS = ("voice", "accent", "words", "pronunciation", "delivery", "unclipped_timing", "sync", "other_speakers", "ambience", "sound_effects")
 ENHANCEMENT_CHECKS = ("identity", "faces", "artifacts", "detail", "crop", "continuity", "timing", "audio")
+UNRESOLVED = {"", "unverified", "unknown", "tbd", "pending", "none", "n/a", "not reviewed", "not granted"}
+
+
+def recorded(value):
+    return value.strip().lower() not in UNRESOLVED
+
+
+def dated(value):
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).utcoffset() is not None
+    except ValueError:
+        return False
 
 
 def shape(value, spec, path="$", errors=None):
@@ -19,9 +31,15 @@ def shape(value, spec, path="$", errors=None):
         errors.append(path + ": invalid type")
         return errors
     if spec.get("type") == "number":
-        if isinstance(value, bool) or not math.isfinite(value):
-            errors.append(path + ": finite number required")
+        try:
+            finite = not isinstance(value, bool) and math.isfinite(value)
+        except OverflowError:
+            finite = False
+        if not finite:
+            errors.append(path + ": finite representable number required")
         elif ("minimum" in spec and value < spec["minimum"]) or ("exclusiveMinimum" in spec and value <= spec["exclusiveMinimum"]):
+            errors.append(path + ": outside numeric bounds")
+        elif "maximum" in spec and value > spec["maximum"]:
             errors.append(path + ": outside numeric bounds")
     if "enum" in spec and value not in spec["enum"]:
         errors.append(path + ": invalid enum")
@@ -74,7 +92,8 @@ def validate(d, stage="preflight"):
     require(camera["approved"] == camera["submitted"] or camera["change_approved"],
             "camera/lens continuity changed without approval")
     transition = d["transition"]
-    if transition["sequential"]:
+    require(not transition["sequential"] or transition["has_edited_seam"], "connected sequential clips require an edited-seam record")
+    if transition["has_edited_seam"]:
         if transition["intent"] == "continuous":
             require(transition["continuous_exception_approved"], "continuous-shot exception must be explicit and approved")
         else:
@@ -93,6 +112,8 @@ def validate(d, stage="preflight"):
         require(plan["approved"] and plan["ordered_lines"] == expected,
                 "approved direct-edit replacement plan must cover exact voices and lines")
         require(plan["payload_version"] == submission["payload_version"], "replacement plan targets stale payload")
+        require(recorded(plan["timeline_ranges"]) and recorded(plan["edit_instructions"]),
+                "direct-edit timing and instructions remain unresolved")
     audio = d["audio"]
     if audio["state"] in ("removed", "changed"):
         require(False, "audio unresolved until approved replacement is installed")
@@ -111,23 +132,29 @@ def validate(d, stage="preflight"):
         require(enhancement["requested"], "no enhancement requested")
         return errors
     review = d["review"]
-    if transition["sequential"]:
+    if transition["has_edited_seam"]:
         require(transition["normal_speed_reviewed"] and transition["seam_export_version"] == review["export_version"],
                 "actual seam requires normal-speed review on current export")
         require(all(v == "pass" for v in transition["checks"].values()), "pose/action/voice/sound seam checks unresolved or failed")
+        seam = transition["seam_review"]
+        require(recorded(seam["reviewer_id"]) and dated(seam["reviewed_at"]), "completed seam reviewer and timestamp required")
+        require(seam["export_asset_id"] == audio["export_asset_id"] and seam["export_version"] == review["export_version"],
+                "seam provenance targets stale export asset/version")
+        require(0 <= seam["export_range"]["start_seconds"] < seam["cut_seconds"] < seam["export_range"]["end_seconds"] <= review["duration_seconds"],
+                "seam review range must straddle the cut within actual export")
+        for source in (seam["outgoing_source"], seam["incoming_source"]):
+            require(recorded(source["asset_id"]) and recorded(source["version"]), "actual seam source asset/version required")
+            require(source["range"]["start_seconds"] < source["range"]["end_seconds"] <= source["duration_seconds"],
+                    "seam source range outside actual source duration")
     require(d["audio"]["export_version"] == review["export_version"], "listening evidence targets stale audio export")
     require(d["release"]["owner_approved"] and d["release"]["export_version"] == review["export_version"],
             "release approval must identify reviewed final export")
     require(review["method"] == "direct_listen" and not review["owner_review_pending"],
             "listening unverified; owner review gate remains open (ASR is not listening)")
     require(review["actual_export_listened"], "actual final export has not been listened to")
-    require(review["listener_id"].strip().lower() not in ("unverified", "unknown", "tbd", "pending", "none"),
+    require(recorded(review["listener_id"]),
             "actual listener identity required")
-    try:
-        listened_at = datetime.fromisoformat(review["listened_at"].replace("Z", "+00:00"))
-        require(listened_at.utcoffset() is not None, "listening timestamp must include timezone")
-    except ValueError:
-        require(False, "valid listening timestamp required")
+    require(dated(review["listened_at"]), "valid timezone-qualified listening timestamp required")
     require(review["listened_source_id"] == audio["export_asset_id"], "listened source does not identify actual export asset")
     duration = review["duration_seconds"]
     ranges = review["listened_ranges"]
@@ -140,9 +167,12 @@ def validate(d, stage="preflight"):
         covered_until = max(covered_until, end)
     require(covered_until == duration, "listening must cover full export including sound effects and ambience")
     require([r["line_id"] for r in review["lines"]] == ids, "final listening must cover every line in order")
+    previous_start = -1
     for line, heard in zip(d["lines"], review["lines"]):
         span = heard["export_range"]
         require(span["start_seconds"] < span["end_seconds"] <= duration, "invalid dialogue range in actual export")
+        require(span["start_seconds"] >= previous_start, "dialogue starts reverse declared playback order")
+        previous_start = span["start_seconds"]
         voice = voices.get(line["character_id"])
         if voice:
             require(heard["character_id"] == line["character_id"] and

@@ -14,6 +14,19 @@ story_approval: PENDING
 prompt_approval: PENDING
 execution_approval: PENDING
 
+## Character-sheet output contract (when applicable)
+
+Current user brief/version and approval:
+Requested view types and count of each:
+Total output panels (reconcile with the view counts):
+Identity — preserve / permitted changes:
+Wardrobe — preserve / permitted changes:
+Style — preserve / permitted changes:
+Composition — preserve / permitted changes:
+Exact final prompt/payload checked against current brief: NOT VERIFIED
+
+Do not inherit the input reference's composition over explicit output instructions. Add no extra portrait, panel, percentage or geometric layout detail unless needed and specified. Record the project's approved layout here rather than assuming a universal panel count. This checklist requires human review; existing validators do not verify character-sheet layout.
+
 ## Shot card
 
 Complete a private continuity JSON packet using the bundled schema. The basic Markdown checker does not validate the voice/camera/finishing fields below; use validate_continuity.py as well. A metadata pass is not an actual media review or authenticated approval.

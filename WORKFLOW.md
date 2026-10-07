@@ -10,6 +10,8 @@ Use one current reference per character unless another view solves a concrete de
 
 For new identity references, prefer a clean background without labels or competing faces. Check anatomy and plot-critical construction. A still establishes appearance and geometry; it cannot establish successful motion.
 
+For character sheets, record the current user-approved output contract: each requested view type and count, total panels, and allowed versus must-preserve identity, wardrobe, style and composition details. Reference images supply approved source information; their composition does not override explicit output instructions. Before submission, compare the exact final prompt and payload against the current user brief, including the view-count total and permitted changes. Do not add portraits, panels, percentages or geometric layout details unless needed and specified in the brief. Keep project-specific layouts in the project packet; there is no universal character-sheet panel count. This is a human preflight check, not an implemented layout validator.
+
 ## 3. Plan shots and transitions
 
 Apply the [voice, camera and finishing gates](CONTINUITY.md). Audition voices per film; approve each character's exact user-heard take/source version as well as provider/ID/type, accent, pronunciation and delivery. No automatic voice reuse or assumed preset/image voice preservation. Keep exact dialogue per line.

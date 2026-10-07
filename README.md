@@ -4,6 +4,7 @@ A reference-first planning and review kit for AI-assisted shorts. It helps defin
 
 - [Workflow](WORKFLOW.md)
 - [Content analytics definitions and exploratory timing proposal](ANALYTICS.md)
+- [Reference transfer routes and verification checklist](MEDIA_TRANSFERS.md)
 - [Production packet template](templates/production.md)
 - [Packet checker](check_packet.py)
 - [Check evidence](evidence/checks.md)

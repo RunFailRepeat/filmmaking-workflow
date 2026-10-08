@@ -21,7 +21,7 @@ Per seam: export window and separately mapped outgoing/incoming source windows:
 Approved dialogue IDs / exact speakers / text / order and cross-cut segment mapping:
 Silent shots: no dialogue; preserve state, geography, effects and ambience:
 Evidence stage: PLANNING ONLY until actual media review is separately recorded
-Repo/plugin versions, tests and unresolved alignment: see work-cycle.md
+Selected workflow sources, repository version/tests/readback and unresolved in-scope issues: see [work-cycle record](work-cycle.md); plugin checks only when authorized
 
 Reference readiness: approved/versioned recurring wardrobe, location, complex prop and background-ensemble references; record missing designs and supported binding roles.
 Production-ready / owner-authorized exploratory test (scope and unresolved references): UNRESOLVED

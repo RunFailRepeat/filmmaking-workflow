@@ -1,6 +1,6 @@
 # Reference-first production workflow
 
-At the start and end of each work cycle, follow the [repo/plugin alignment contract](PLANNING.md#work-cycle-alignment): inspect current versions and the private brief, capture validated reusable corrections, test both surfaces, and record aligned versions or unresolved drift. Keep project-specific context private; do not claim a pending plugin update is complete.
+At the start and end of each work cycle, follow the [owner-selected source contract](PLANNING.md#work-cycle-alignment): inspect the repository version and private brief, capture validated reusable corrections, test the authorized changes, and record results or unresolved issues. Repository-only operation is complete when its scoped checks pass; an excluded plugin must not be loaded, updated or synchronized. Compare additional surfaces only when the owner authorizes that scope. Keep project-specific context private.
 
 ## 1. Define the story
 

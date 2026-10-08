@@ -14,6 +14,15 @@ story_approval: PENDING
 prompt_approval: PENDING
 execution_approval: PENDING
 
+User-defined duration minimum / target / maximum:
+Beat windows in export seconds:
+Per clip: source ID/version/duration, source in/out (including head trim), export start/end:
+Per seam: export window and separately mapped outgoing/incoming source windows:
+Approved dialogue IDs / exact speakers / text / order and cross-cut segment mapping:
+Silent shots: no dialogue; preserve state, geography, effects and ambience:
+Evidence stage: PLANNING ONLY until actual media review is separately recorded
+Repo/plugin versions, tests and unresolved alignment: see work-cycle.md
+
 ## Character-sheet output contract (when applicable)
 
 Current user brief/version and approval:

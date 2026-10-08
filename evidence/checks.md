@@ -1,8 +1,10 @@
 # Reproducible check evidence
 
-Checked 2026-10-07 with Python 3 standard library only.
+Checked 2026-10-08 with Python 3 standard library only.
 
-- python -m unittest discover -s tests -v: 44 tests passed.
+- python -m unittest discover -s tests -v: 56 tests passed.
+- python -m unittest discover -s tests -p test_plan.py -v: 12 focused planning tests passed.
+- python validate_plan.py examples/fictional-plan.json: consistent planning metadata only.
 - python validate_shot.py examples/fictional-shot.json: metadata valid.
 - The unfilled Markdown template is expected to fail check_packet.py readiness.
 - The fictional continuity packet conforms to the bundled shape but intentionally fails preflight/enhancement/release approval gates. No actual audio or export exists.
@@ -20,3 +22,5 @@ Schema string patterns are also checked against the fictional field values and w
 Source review: scripts read text/JSON and print diagnostics; no network, dependencies, subprocesses, writes, billing or model execution. No actual footage was reviewed. These checks cannot authenticate approvals, prove rights or judge cinematography.
 
 See [bounded correction reproductions](corrections-2026-10-07.md) for verified before/after behavior, compatibility and risks.
+
+Planning tests cover user-defined durations below/above a legacy fixed range, beat bounds, zero/nonzero head trims, source/export coordinate separation, hard-cut joins, exact dialogue/speaker/order and complete cross-cut segments, overlapping speakers, silent-shot continuity and explicit planning-only evidence. No private legacy helper or production assets were imported. Existing release checks are unchanged. Plugin alignment is recorded separately after its own guarded update; these repo tests do not certify an installed plugin version.

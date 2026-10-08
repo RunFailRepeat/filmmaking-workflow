@@ -1,8 +1,12 @@
 # Reference-first production workflow
 
+At the start and end of each work cycle, follow the [repo/plugin alignment contract](PLANNING.md#work-cycle-alignment): inspect current versions and the private brief, capture validated reusable corrections, test both surfaces, and record aligned versions or unresolved drift. Keep project-specific context private; do not claim a pending plugin update is complete.
+
 ## 1. Define the story
 
 Write the character objective, obstacle, visible causal chain and ending. Fix the target edit duration, audience, delivery format and exact dialogue. Time dialogue at its intended delivery speed; leave room for action and reactions.
+
+Use user-defined duration and beat windows rather than a fixed episode range. Apply the [planning coordinate contract](PLANNING.md) to retained source ranges, export ranges and zero/nonzero head trims. Preserve exact dialogue/speaker/order through coverage cuts; silent shots still require continuity and sound planning. Planning checks are never actual-media evidence.
 
 ## 2. Build a small approved reference kit
 

@@ -12,6 +12,8 @@ Use user-defined duration and beat windows rather than a fixed episode range. Ap
 
 Use one current reference per character unless another view solves a concrete design problem. Track version, role, rights, attribution and approval in an asset ledger. Use opaque asset IDs in shared packets. Never silently replace approved identity, costume or prop design.
 
+Reference readiness also covers recurring wardrobe, locations, complex props and background ensembles when required by the shot. Inspect actual approved, versioned visual references and their supported binding roles; names or structurally complete fields are insufficient. Record missing designs as unresolved. An owner may explicitly authorize a bounded exploratory generation with those gaps disclosed, but it remains an exploratory test, not a production-ready claim; normal execution and spending approvals still apply.
+
 For new identity references, prefer a clean background without labels or competing faces. Check anatomy and plot-critical construction. A still establishes appearance and geometry; it cannot establish successful motion.
 
 For character sheets, record the current user-approved output contract: each requested view type and count, total panels, and allowed versus must-preserve identity, wardrobe, style and composition details. Reference images supply approved source information; their composition does not override explicit output instructions. Before submission, compare the exact final prompt and payload against the current user brief, including the view-count total and permitted changes. Do not add portraits, panels, percentages or geometric layout details unless needed and specified in the brief. Keep project-specific layouts in the project packet; there is no universal character-sheet panel count. This is a human preflight check, not an implemented layout validator.
@@ -26,6 +28,8 @@ Also specify framing, focus/depth of field and reshoot continuity. Lens/focal-le
 
 Give every shot a purpose, source duration, usable edit range, start/action/end, camera side, screen direction and sound. Carry momentum, pose, eyelines, object states and support contacts across cuts. Distinguish simultaneous coverage from sequential story time: two angles of one event do not double its story duration.
 
+Separate director intent from mechanical QA. Describe the performance, reaction, pace and purpose of each angle. When requested, begin with natural movement already in progress and preserve its momentum; a start-state description need not be a held opening pose. Keep per-foot/contact inspection details in review notes unless an essential physical constraint must appear in the prompt. Do not turn those checks into a pause or rigid pose that changes the intended performance. Actual playback must establish whether the movement and reaction work.
+
 Use separate coverage when a complicated contact cannot be judged clearly. Multishot scenes are acceptable when geometry and timing remain manageable.
 
 For sequential generated clips, carry the prior ending's character positions/poses/action, props and environment into the next shot without automatically fixing its opening composition. Default to an intentional new angle or meaningful shot-size change, preserving screen direction, eyelines, the 180-degree axis and timing. Avoid tiny camera shifts, duplicated action and frozen overlap. Record outgoing state, incoming angle/cut plan and optional match-on-action/edit handles. State-reference binding is different from literal fixed start-frame conditioning: use supported alternative reference modes/coverage or verified trim handles when a provider forces the first frame. A continuous-shot exception must be explicit. Review the actual seam at normal speed for pose/action/voice/sound before accepting it.
@@ -36,13 +40,17 @@ Edited-seam presence is independent of sequential versus simultaneous story time
 
 ## 4. Review the exact submission
 
-For every shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.
+For every speaking shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.
 
 Show the exact prompt, actual reference order, supported binding syntax, provider/model/mode, duration, resolution, audio and count. Describe action and physical cause/effect rather than repeating every visual trait. Assess READY / NEEDS DESIGN / HIGH RISK and define indispensable usable seconds.
+
+Inspect estimate-tool side effects before quoting; follow [media-transfer guidance](MEDIA_TRANSFERS.md). Some estimate calls import/confirm URL references despite not generating media. Obtain transfer authority where needed and reuse compatible confirmed IDs or returned prepared parameters after verifying source version and role; do not repeatedly import the same URL. A quote or transfer does not authorize generation.
 
 Prompt approval is separate from spending and execution approval. Record bounded authorization for exact settings/count and any resource or cost limit. A quote is not a provider-enforced cap. No automatic retries, upgrades or subscriptions.
 
 Before any paid generation, obtain a live dated quote for the exact payload, show its expiry/uncertainty and request explicit spending authorization. Keep an immutable ledger of source versions, payload hashes, job IDs, settings and outputs; append corrections instead of overwriting past submissions.
+
+Do not attribute a model failure to prompt length or valid references without evidence. There is no universal prompt-length limit in this workflow. A comparison testing shorter wording must hold model, action, references, duration and settings constant; distinguish observed results from hypotheses.
 
 ## 5. Generate only authorized work
 

@@ -23,6 +23,10 @@ Silent shots: no dialogue; preserve state, geography, effects and ambience:
 Evidence stage: PLANNING ONLY until actual media review is separately recorded
 Repo/plugin versions, tests and unresolved alignment: see work-cycle.md
 
+Reference readiness: approved/versioned recurring wardrobe, location, complex prop and background-ensemble references; record missing designs and supported binding roles.
+Production-ready / owner-authorized exploratory test (scope and unresolved references): UNRESOLVED
+Estimate reference-transfer side effects / authority / reused confirmed bindings: see [media transfers](../MEDIA_TRANSFERS.md)
+
 ## Character-sheet output contract (when applicable)
 
 Current user brief/version and approval:
@@ -38,13 +42,16 @@ Do not inherit the input reference's composition over explicit output instructio
 
 ## Shot card
 
-Complete a private continuity JSON packet using the bundled schema. The basic Markdown checker does not validate the voice/camera/finishing fields below; use validate_continuity.py as well. A metadata pass is not an actual media review or authenticated approval.
+For speaking material, complete a private packet using the [dialogue continuity schema](../schemas/continuity.schema.json) and validate_continuity.py. For silent shots, use the [planning contract](../PLANNING.md) with no dialogue segments on silent clips (empty ledgers for an entirely silent plan) and retain the visual/action seam and actual sound-review records below; do not invent speech or voice approvals. In a mixed edit, silent clips remain part of whole-export visual/sound review. Mark speech-only fields not applicable with a reason, including exact_dialogue: NONE (silent shot). The basic Markdown checker only checks fields and approval markers; neither it nor a planning pass establishes visual references, performance, actual media review or authenticated approval. Silent-export acceptance is human review, not a dialogue-schema release pass.
 
 shot_id: TBD
 source_duration_seconds: TBD
 usable_range: TBD
 start_state: TBD
 action: TBD
+director_intent_performance_reaction_and_opening_motion_phase: TBD
+coverage_purpose: TBD
+mechanical_review_details_separate_from_performance_prompt: TBD
 end_state: TBD
 screen_direction: TBD
 exact_dialogue: TBD

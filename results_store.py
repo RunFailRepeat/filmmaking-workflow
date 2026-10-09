@@ -80,11 +80,12 @@ def connect(path):
     db.row_factory = sqlite3.Row
     db.execute('PRAGMA foreign_keys=ON')
     version = db.execute('PRAGMA user_version').fetchone()[0]
-    require(version in (0, 1), 'unsupported database version')
-    if version == 0:
-        # One transaction includes DDL and version; failed migration rolls back.
+    require(version in (0, 1, 2), 'unsupported database version')
+    migrations = {1: '001_results.sql', 2: '002_brief_analysis.sql'}
+    for target in range(version + 1, 3):
+        # Each migration includes DDL and version atomically; existing records are untouched.
         try:
-            db.executescript('BEGIN IMMEDIATE;\n' + (ROOT / 'migrations/001_results.sql').read_text() + '\nPRAGMA user_version=1;\nCOMMIT;')
+            db.executescript('BEGIN IMMEDIATE;\n' + (ROOT / 'migrations' / migrations[target]).read_text() + f'\nPRAGMA user_version={target};\nCOMMIT;')
         except Exception:
             db.rollback()
             db.close()
@@ -109,7 +110,8 @@ def semantic(db, r):
         require(r['id'] == r['attempt_id'], 'attempt id must equal record id')
         require(digest(d['prompt']) == d['prompt_sha256'], 'prompt hash mismatch')
         require(d['shots'] and all(not re.search(r'(?m)^\s*CUT\s*$', s) for s in d['shots']), 'shots must be nonempty blocks without embedded CUT lines')
-        require(d['prompt'] == '\nCUT\n'.join(d['shots']), 'each shot transition must be literal uppercase CUT on its own line')
+        if d['origin'] == 'planned_submission':
+            require(d['prompt'] == '\nCUT\n'.join(d['shots']), 'each shot transition must be literal uppercase CUT on its own line')
         if d['parent_attempt_id'] is not None:
             parent = record(db, d['parent_attempt_id'])
             require(parent['kind'] == 'attempt' and parent['data']['project_id'] == d['project_id'], 'retry parent must be an existing attempt in this project')
@@ -181,6 +183,9 @@ def gate(db, attempt_id, stage):
     require(a['kind'] == 'attempt', 'not an attempt')
     d = a['data']
     problems = []
+    submitted = d.get('submitted_brief')
+    if submitted is None or any(v is None for v in submitted.values()):
+        problems.append('submitted brief version/hash unresolved (legacy records remain unchanged)')
     audits = events(db, attempt_id, 'audit')
     audit = audits[-1] if audits else None
     if audit is None or audit['data']['decision'] != 'pass':
@@ -193,6 +198,8 @@ def gate(db, attempt_id, stage):
         problems.append('reference identity/hash unknown')
     jobs = events(db, attempt_id, 'job')
     if stage == 'prompt':
+        if d.get('origin') != 'planned_submission':
+            problems.append('historical attempt is archival, not a new submission')
         if jobs:
             problems.append('job already recorded; audit is no longer pre-generation')
         return problems
@@ -210,6 +217,10 @@ def gate(db, attempt_id, stage):
         problems.append('review is stale or output hash unknown')
     if audit and r['reviewer'] == audit['data']['reviewer']:
         problems.append('result checker must be independent of prompt auditor')
+    if r.get('current_brief_compliance') != 'pass' or not r.get('latest_owner_brief') or any(v is None for v in r['latest_owner_brief'].values()):
+        problems.append('current owner brief compliance/version unresolved')
+    if not r.get('acceptance_checks') or any(c['result'] not in ('pass', 'not_applicable') for c in r['acceptance_checks']):
+        problems.append('acceptance checks unresolved')
     if r['outcome'] != 'accept' or r['defects'] or r['visual'] != 'pass' or r['visual_method'] != 'normal_speed_playback' or not full_coverage(r['watched'], o['duration']):
         problems.append('visual review/acceptance incomplete or defects unresolved')
     audio_required = d['audio_expected'] is True or o['audio_track_present'] is True
@@ -259,7 +270,7 @@ def main():
         elif args.command == 'query':
             print(json.dumps(query(db, Path(args.file).read_text()), indent=2))
         else:
-            print('Local schema initialized at version 1; keep database private.')
+            print('Local schema initialized at version 2; keep database private.')
     return 0
 
 

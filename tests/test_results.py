@@ -24,17 +24,19 @@ class ResultsChecks(unittest.TestCase):
         self.tmp.cleanup()
 
     def ingest(self, records=None):
-        return ingest(self.db, self.bundle if records is None else {'schema_version': 1, 'records': records})
+        return ingest(self.db, self.bundle if records is None else {'schema_version': 2, 'records': records})
 
     def passing_review(self):
         r = self.bundle['records'][4]
+        r['data']['current_brief_compliance'] = 'pass'
+        r['data']['acceptance_checks'][0].update(result='pass', evidence=[{'source':'fictional-output-01','description':'Synthetic checked result'}])
         r['data'].update(outcome='accept', visual='pass', audio='pass', audio_method='direct_listening', defects=[], suspected_causes=[], listened=[{'start': 0, 'end': 8}])
         return r
 
     def test_migration_and_reopen_preserve_rows(self):
         self.ingest()
         self.db.close(); self.db = connect(self.path)
-        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 1)
+        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 2)
         self.assertEqual(len(query(self.db, 'SELECT * FROM records')), 6)
 
     def test_duplicate_ingestion_is_idempotent_and_conflicts_are_atomic(self):
@@ -186,3 +188,43 @@ class ResultsChecks(unittest.TestCase):
         r = copy.deepcopy(self.bundle['records'][1]); r.update(id='late-audit', at='2026-10-09T00:03:00Z')
         self.ingest([r])
         self.assertTrue(any('precede' in x for x in gate(self.db, self.id, 'result')))
+
+    def test_submitted_and_current_brief_findings_remain_distinct(self):
+        r = self.bundle['records'][4]['data']
+        r.update(submitted_brief_compliance='pass', current_brief_compliance='fail')
+        r['defects'][0]['category'] = 'planning_omission'
+        self.ingest()
+        stored = record(self.db, self.bundle['records'][4]['id'])['data']
+        self.assertEqual(stored['submitted_brief_compliance'], 'pass')
+        self.assertEqual(stored['current_brief_compliance'], 'fail')
+        self.assertEqual(record(self.db, self.id)['data']['submitted_brief']['version'], 'v1')
+        self.assertEqual(stored['latest_owner_brief']['version'], 'v2')
+        self.assertTrue(gate(self.db, self.id, 'result'))
+
+    def test_current_brief_unknown_cannot_be_accepted(self):
+        self.passing_review()['data']['latest_owner_brief']['sha256'] = None
+        self.ingest()
+        self.assertTrue(any('current owner brief' in x for x in gate(self.db, self.id, 'result')))
+
+    def test_v1_migration_preserves_history_with_unknown_brief(self):
+        from results_store import canonical
+        self.db.close()
+        self.path.unlink()
+        legacy = sqlite3.connect(self.path)
+        legacy.executescript(Path('migrations/001_results.sql').read_text() + '\nPRAGMA user_version=1;')
+        a = copy.deepcopy(self.bundle['records'][0]); a['data'].pop('submitted_brief')
+        body = canonical(a)
+        legacy.execute('INSERT INTO records(id,attempt_id,kind,at,sha256,body) VALUES(?,?,?,?,?,?)', (a['id'], a['attempt_id'], a['kind'], a['at'], digest(body), body))
+        legacy.commit(); legacy.close()
+        self.db = connect(self.path)
+        self.assertEqual(record(self.db, self.id), a)
+        self.assertTrue(any('submitted brief' in x for x in gate(self.db, self.id, 'prompt')))
+        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 2)
+
+    def test_historical_prompt_preserves_missing_cut_but_cannot_submit(self):
+        d = self.bundle['records'][0]['data']
+        d.update(origin='historical_attempt', prompt='Original historical wording without a CUT delimiter.')
+        d['prompt_sha256'] = digest(d['prompt'])
+        self.ingest(self.bundle['records'][:2])
+        self.assertEqual(record(self.db, self.id)['data']['prompt'], d['prompt'])
+        self.assertTrue(gate(self.db, self.id, 'prompt'))

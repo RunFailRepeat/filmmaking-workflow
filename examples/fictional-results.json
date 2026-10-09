@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "records": [
     {
       "id": "fictional-attempt-01",
@@ -7,6 +7,12 @@
       "attempt_id": "fictional-attempt-01",
       "at": "2026-10-09T00:00:00Z",
       "data": {
+        "origin": "planned_submission",
+        "submitted_brief": {
+          "id": "fictional-brief",
+          "version": "v1",
+          "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
         "project_id": "fictional-demo",
         "parent_attempt_id": null,
         "changes": [],
@@ -94,6 +100,21 @@
       "attempt_id": "fictional-attempt-01",
       "at": "2026-10-09T00:00:04Z",
       "data": {
+        "latest_owner_brief": {
+          "id": "fictional-brief",
+          "version": "v2",
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "submitted_brief_compliance": "unverified",
+        "current_brief_compliance": "fail",
+        "acceptance_checks": [
+          {
+            "criterion": "Continuous movement",
+            "result": "fail",
+            "assessed_against": "latest_owner_brief",
+            "evidence": []
+          }
+        ],
         "reviewer": "fictional-checker",
         "output_record_id": "fictional-output-01",
         "outcome": "reject",
@@ -110,6 +131,7 @@
         "listened": [],
         "defects": [
           {
+            "category": "unknown",
             "description": "Invented frozen movement at the cut.",
             "at_seconds": 4,
             "evidence": [

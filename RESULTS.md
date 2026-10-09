@@ -59,3 +59,15 @@ Queries run through a read-only SQLite authorizer. [Attempt outcomes](queries/at
 Use [brief compliance](queries/brief_compliance.sql) to compare the two compliance judgments, and the `classified_defects` and `acceptance_checks` views for their detailed evidence.
 
 These records stay local. Repository-only workflow is supported; no plugin loading or synchronization is required.
+
+## Independent observation and hypothesis analytics
+
+[findings_store.py](findings_store.py) imports complete findings into a separate append-only SQLite table using [the findings schema](schemas/findings.schema.json). This closes the gap between aggregate review checks and independently queryable observations/hypotheses. It preserves qualitative confidence verbatim, optional numeric confidence, source evidence/details, attempt links, source-document hash, recorded time, unknown observation time and whether the source is a summary. Empty attempt links mean unresolved association, not a guessed attempt; details may retain unresolved observation IDs. No finding import changes a review outcome or grants acceptance.
+
+```sh
+python findings_store.py --db local-projects/demo/results.sqlite3 examples/fictional-findings.json
+python results_store.py --db local-projects/demo/results.sqlite3 query queries/observations.sql
+python results_store.py --db local-projects/demo/results.sqlite3 query queries/hypotheses.sql
+```
+
+[Migration 003](migrations/003_findings.sql) adds `findings`, `current_findings` and `finding_analysis` without modifying existing rows. The database is now version 3; production-record imports remain schema version 2 and findings imports use their own version 1. Findings require stable source IDs. Exact repeats insert zero; conflicting IDs or duplicate roots are rejected atomically. Corrections use a new immutable ID with `supersedes` pointing to the current revision of the same kind/source ID; branches are rejected. All historical rows remain queryable in `findings`, while the bundled queries show current revisions. Missing source records remain missing—never synthesize them from a related hypothesis. Record quality defects independently from an owner's decision to keep a fragment for later editing.

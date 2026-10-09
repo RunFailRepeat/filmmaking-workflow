@@ -80,9 +80,9 @@ def connect(path):
     db.row_factory = sqlite3.Row
     db.execute('PRAGMA foreign_keys=ON')
     version = db.execute('PRAGMA user_version').fetchone()[0]
-    require(version in (0, 1, 2), 'unsupported database version')
-    migrations = {1: '001_results.sql', 2: '002_brief_analysis.sql'}
-    for target in range(version + 1, 3):
+    require(version in (0, 1, 2, 3), 'unsupported database version')
+    migrations = {1: '001_results.sql', 2: '002_brief_analysis.sql', 3: '003_findings.sql'}
+    for target in range(version + 1, 4):
         # Each migration includes DDL and version atomically; existing records are untouched.
         try:
             db.executescript('BEGIN IMMEDIATE;\n' + (ROOT / 'migrations' / migrations[target]).read_text() + f'\nPRAGMA user_version={target};\nCOMMIT;')
@@ -270,7 +270,7 @@ def main():
         elif args.command == 'query':
             print(json.dumps(query(db, Path(args.file).read_text()), indent=2))
         else:
-            print('Local schema initialized at version 2; keep database private.')
+            print('Local schema initialized at version 3; keep database private.')
     return 0
 
 

@@ -36,7 +36,7 @@ class ResultsChecks(unittest.TestCase):
     def test_migration_and_reopen_preserve_rows(self):
         self.ingest()
         self.db.close(); self.db = connect(self.path)
-        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 2)
+        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 3)
         self.assertEqual(len(query(self.db, 'SELECT * FROM records')), 6)
 
     def test_duplicate_ingestion_is_idempotent_and_conflicts_are_atomic(self):
@@ -219,7 +219,7 @@ class ResultsChecks(unittest.TestCase):
         self.db = connect(self.path)
         self.assertEqual(record(self.db, self.id), a)
         self.assertTrue(any('submitted brief' in x for x in gate(self.db, self.id, 'prompt')))
-        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 2)
+        self.assertEqual(self.db.execute('PRAGMA user_version').fetchone()[0], 3)
 
     def test_historical_prompt_preserves_missing_cut_but_cannot_submit(self):
         d = self.bundle['records'][0]['data']

@@ -3,6 +3,7 @@
 A reference-first planning and review kit for AI-assisted shorts. It helps define shots, preserve continuity, review actual footage and control approvals. It does not generate media or authorize spending.
 
 - [Workflow](WORKFLOW.md)
+- [Prompt auditor, independent result checker and private SQLite results store](RESULTS.md), [reviewer briefs](templates/reviewers.md) and [import schema](schemas/results.schema.json)
 - [Planning duration/coverage contracts and owner-selected workflow sources](PLANNING.md), [planning schema](schemas/plan.schema.json), [fictional plan](examples/fictional-plan.json), and [work-cycle record](templates/work-cycle.md)
 - [Content analytics definitions and exploratory timing proposal](ANALYTICS.md)
 - [Reference transfer routes and verification checklist](MEDIA_TRANSFERS.md)
@@ -32,4 +33,4 @@ This repository contains reusable guidance, original utility code and synthetic 
 
 Public availability does not grant rights to third-party models or assets. No third-party source code, model weights or private production material is distributed.
 
-Roadmap: evaluate a real approved production packet, add immutable job-ledger and editable-timeline interchange schemas, and validate those with actual reviewed exports. No provider integration, footage QA automation or production-quality result is implemented. The JSON Schema defines field constraints; validate_shot.py also checks edit duration against source duration. Neither verifies approvals or media.
+Roadmap: evaluate the private results ledger against a real approved production packet and add editable-timeline interchange schemas validated with actual reviewed exports. No provider integration, footage QA automation or production-quality result is implemented. The JSON Schema defines field constraints; validate_shot.py also checks edit duration against source duration. Neither verifies approvals or media.

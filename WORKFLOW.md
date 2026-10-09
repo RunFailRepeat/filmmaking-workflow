@@ -40,6 +40,8 @@ Edited-seam presence is independent of sequential versus simultaneous story time
 
 ## 4. Review the exact submission
 
+Use the [prompt auditor and private results ledger](RESULTS.md) before generation. Record an immutable attempt and separate audit; use literal uppercase `CUT` on its own line at every shot transition. A declared audit pass does not authorize execution or spending.
+
 For every speaking shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.
 
 Show the exact prompt, actual reference order, supported binding syntax, provider/model/mode, duration, resolution, audio and count. Describe action and physical cause/effect rather than repeating every visual trait. Assess READY / NEEDS DESIGN / HIGH RISK and define indispensable usable seconds.
@@ -57,6 +59,8 @@ Do not attribute a model failure to prompt length or valid references without ev
 Review code and dependencies before local execution. Preserve exact payload/config versions and job identifiers. Verify an uncertain submission's status before retrying. Check each dependent shot's actual ending before requesting the next one.
 
 ## 6. Review evidence and repair minimally
+
+Assign the [independent result/failure checker](templates/reviewers.md), distinct from the prompt auditor. Append job/output, observed defects with timestamps, suspected causes with confidence/evidence, owner feedback, costs and acceptance records to the private ledger. Unknown values remain unknown. Link separately authorized retries to the earlier attempt and exact changes; preserve all history.
 
 Watch at normal speed and listen to audio. Inspect critical contacts frame by frame. Record whether evidence is full playback, listened audio, sampled frames or transcript only. Never call sampled stills a full motion review.
 

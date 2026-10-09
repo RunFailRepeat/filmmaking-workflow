@@ -1,8 +1,8 @@
 # Reproducible check evidence
 
-Checked 2026-10-08 with Python 3 standard library only.
+Checked 2026-10-09 with Python 3 standard library only.
 
-- python -m unittest discover -s tests -v: 56 tests passed.
+- python -m unittest discover -s tests -v: 80 tests passed.
 - python -m unittest discover -s tests -p test_plan.py -v: 12 focused planning tests passed.
 - python validate_plan.py examples/fictional-plan.json: consistent planning metadata only.
 - python validate_shot.py examples/fictional-shot.json: metadata valid.
@@ -24,3 +24,5 @@ Source review: scripts read text/JSON and print diagnostics; no network, depende
 See [bounded correction reproductions](corrections-2026-10-07.md) for verified before/after behavior, compatibility and risks.
 
 Planning tests cover user-defined durations below/above a legacy fixed range, beat bounds, zero/nonzero head trims, source/export coordinate separation, hard-cut joins, exact dialogue/speaker/order and complete cross-cut segments, overlapping speakers, silent-shot continuity and explicit planning-only evidence. No private legacy helper or production assets were imported. Existing release checks are unchanged. Plugin alignment is recorded separately after its own guarded update; these repo tests do not certify an installed plugin version.
+
+Results-ledger checks: 24 focused tests (`python -m unittest discover -s tests -p test_results.py -v`) pass. They cover atomic migration/reopen, append-only history, idempotent/conflicting imports, rollback, duplicate events/jobs, immutable prompt hashes/versions, uppercase CUT, retry ancestry, unknown values, cumulative cost units, independent and stale review gates, full playback/listening versus ASR/metadata, silent outputs, invalid records and read-only queries. CLI init/import/reimport, expected blocked fictional result and all four bundled queries passed against a temporary synthetic database. No actual project records or populated database were published; no media, network/provider calls, installs or plugin access occurred. JSON/link/privacy/whitespace and database/sidecar ignore checks passed. The tool checks declarations; it does not perform semantic prompt evaluation or actual media review itself.

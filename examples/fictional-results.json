@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "fictional-attempt-01",
+      "kind": "attempt",
+      "attempt_id": "fictional-attempt-01",
+      "at": "2026-10-09T00:00:00Z",
+      "data": {
+        "project_id": "fictional-demo",
+        "parent_attempt_id": null,
+        "changes": [],
+        "prompt_id": "fictional-prompt",
+        "prompt_version": "v1",
+        "prompt": "A fictional adult is already walking toward a counter.\nCUT\nA purposeful closer angle shows a brief puzzled reaction.",
+        "prompt_sha256": "3dedb46fca8c45958d331447afeea4dcf6f57f5907663a762373e21d2a2bc291",
+        "shots": [
+          "A fictional adult is already walking toward a counter.",
+          "A purposeful closer angle shows a brief puzzled reaction."
+        ],
+        "references": [
+          {
+            "id": "fictional-reference",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "role": "identity"
+          }
+        ],
+        "model": "fictional-model",
+        "settings": {
+          "duration": 8,
+          "aspect_ratio": "16:9"
+        },
+        "audio_expected": true,
+        "quote": {
+          "amount": null,
+          "unit": null,
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "fictional-audit-01",
+      "kind": "audit",
+      "attempt_id": "fictional-attempt-01",
+      "at": "2026-10-09T00:00:01Z",
+      "data": {
+        "reviewer": "fictional-auditor",
+        "decision": "pass",
+        "checks": {
+          "brief": "pass",
+          "cut_transitions": "pass",
+          "reference_readiness": "pass",
+          "bindings": "pass",
+          "performance": "pass",
+          "dialogue": "pass",
+          "settings": "pass"
+        },
+        "findings": [],
+        "evidence": [
+          {
+            "source": "fictional-brief-v1",
+            "description": "Invented audit declaration for tests, not an approved production."
+          }
+        ]
+      }
+    },
+    {
+      "id": "fictional-job-01",
+      "kind": "job",
+      "attempt_id": "fictional-attempt-01",
+      "at": "2026-10-09T00:00:02Z",
+      "data": {
+        "provider": "fictional-provider",
+        "job_id": "fictional-job",
+        "status": "completed",
+        "receipt": null
+      }
+    },
+    {
+      "id": "fictional-output-01",
+      "kind": "output",
+      "attempt_id": "fictional-attempt-01",
+      "at": "2026-10-09T00:00:03Z",
+      "data": {
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "asset_id": "fictional-output",
+        "duration": 8,
+        "audio_track_present": true
+      }
+    },
+    {
+      "id": "fictional-review-01",
+      "kind": "review",
+      "attempt_id": "fictional-attempt-01",
+      "at": "2026-10-09T00:00:04Z",
+      "data": {
+        "reviewer": "fictional-checker",
+        "output_record_id": "fictional-output-01",
+        "outcome": "reject",
+        "visual": "fail",
+        "visual_method": "normal_speed_playback",
+        "audio_method": "unavailable",
+        "audio": "unverified",
+        "watched": [
+          {
+            "start": 0,
+            "end": 8
+          }
+        ],
+        "listened": [],
+        "defects": [
+          {
+            "description": "Invented frozen movement at the cut.",
+            "at_seconds": 4,
+            "evidence": [
+              {
+                "source": "fictional-output-01",
+                "description": "Synthetic observation only; no media exists."
+              }
+            ]
+          }
+        ],
+        "suspected_causes": [
+          {
+            "hypothesis": "Opening-state wording may have encouraged a hold; untested.",
+            "confidence": null,
+            "evidence": []
+          }
+        ],
+        "notes": "Fictional failure review; audio-track presence is not listening."
+      }
+    },
+    {
+      "id": "fictional-feedback-01",
+      "kind": "feedback",
+      "attempt_id": "fictional-attempt-01",
+      "at": "2026-10-09T00:00:05Z",
+      "data": {
+        "owner": "fictional-owner",
+        "text": "Synthetic feedback: preserve momentum in a future approved retry.",
+        "outcome": "revise",
+        "evidence": null
+      }
+    }
+  ]
+}

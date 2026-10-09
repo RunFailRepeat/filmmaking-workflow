@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Planning-only normal-speed hard-cut timeline",
+  "type": "object",
+  "properties": {
+    "evidence_kind": {
+      "enum": [
+        "planning_only"
+      ]
+    },
+    "duration": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "number",
+          "maximum": 1.7976931348623157e+308,
+          "exclusiveMinimum": 0
+        },
+        "target": {
+          "type": "number",
+          "maximum": 1.7976931348623157e+308,
+          "exclusiveMinimum": 0
+        },
+        "maximum": {
+          "type": "number",
+          "maximum": 1.7976931348623157e+308,
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "minimum",
+        "target",
+        "maximum"
+      ],
+      "additionalProperties": false
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "start": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "start",
+          "end"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "clips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "source_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "source_version": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "source_duration": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          },
+          "source_in": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "minimum": 0
+          },
+          "source_out": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          },
+          "export_start": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "minimum": 0
+          },
+          "export_end": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          },
+          "dialogue_mode": {
+            "enum": [
+              "silent",
+              "spoken"
+            ]
+          },
+          "start_state": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "end_state": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "id",
+          "source_id",
+          "source_version",
+          "source_duration",
+          "source_in",
+          "source_out",
+          "export_start",
+          "export_end",
+          "dialogue_mode",
+          "start_state",
+          "end_state"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "seams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "outgoing": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "incoming": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "before": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          },
+          "after": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          },
+          "export_window": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "number",
+                "maximum": 1.7976931348623157e+308,
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "maximum": 1.7976931348623157e+308,
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          },
+          "outgoing_source_window": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "number",
+                "maximum": 1.7976931348623157e+308,
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "maximum": 1.7976931348623157e+308,
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          },
+          "incoming_source_window": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "number",
+                "maximum": 1.7976931348623157e+308,
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "maximum": 1.7976931348623157e+308,
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "outgoing",
+          "incoming",
+          "before",
+          "after",
+          "export_window",
+          "outgoing_source_window",
+          "incoming_source_window"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "approved_dialogue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "speaker": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "text": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "start": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "maximum": 1.7976931348623157e+308,
+            "exclusiveMinimum": 0
+          }
+        },
+        "required": [
+          "id",
+          "speaker",
+          "text",
+          "start",
+          "end"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "dialogue_coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "speaker": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "text": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "clip": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "export_start": {
+                  "type": "number",
+                  "maximum": 1.7976931348623157e+308,
+                  "minimum": 0
+                },
+                "export_end": {
+                  "type": "number",
+                  "maximum": 1.7976931348623157e+308,
+                  "exclusiveMinimum": 0
+                },
+                "source_start": {
+                  "type": "number",
+                  "maximum": 1.7976931348623157e+308,
+                  "minimum": 0
+                },
+                "source_end": {
+                  "type": "number",
+                  "maximum": 1.7976931348623157e+308,
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "clip",
+                "export_start",
+                "export_end",
+                "source_start",
+                "source_end"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "speaker",
+          "text",
+          "segments"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "evidence_kind",
+    "duration",
+    "beats",
+    "clips",
+    "seams",
+    "approved_dialogue",
+    "dialogue_coverage"
+  ],
+  "additionalProperties": false
+}

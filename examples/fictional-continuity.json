@@ -1,0 +1,225 @@
+{
+  "project_id": "fictional-cup-film",
+  "shot_id": "fictional-cup-01",
+  "voices": [
+    {
+      "character_id": "fictional-adult-A",
+      "provider": "fictional-provider",
+      "voice_id": "fictional-voice",
+      "voice_type": "generated-take",
+      "take_id": "fictional-audition-take-01",
+      "source_version": "fictional-take-v1",
+      "accent": "General American",
+      "pronunciation": "All set: ordinary stress on set",
+      "delivery": "Calm after cup contact",
+      "owner_approved": false,
+      "user_heard": false,
+      "audition_project_id": "fictional-cup-film"
+    }
+  ],
+  "lines": [
+    {
+      "line_id": "line-01",
+      "character_id": "fictional-adult-A",
+      "exact_dialogue": "All set."
+    }
+  ],
+  "camera": {
+    "approved": {
+      "lens_focal_length_look": "50mm-equivalent visual intent, not physical optics guarantee",
+      "framing": "Counter-height medium insert",
+      "focus_depth_of_field": "Cup and hand sharp; soft background",
+      "movement": "Locked camera"
+    },
+    "submitted": {
+      "lens_focal_length_look": "50mm-equivalent visual intent, not physical optics guarantee",
+      "framing": "Counter-height medium insert",
+      "focus_depth_of_field": "Cup and hand sharp; soft background",
+      "movement": "Locked camera"
+    },
+    "change_approved": false
+  },
+  "submission": {
+    "payload_version": "fictional-payload-v1",
+    "actual_payload_reviewed": false,
+    "route": "provider_bindings",
+    "bindings_supported": true,
+    "ordered_bindings": [
+      {
+        "character_id": "fictional-adult-A",
+        "provider": "fictional-provider",
+        "voice_id": "fictional-voice",
+        "voice_type": "generated-take",
+        "take_id": "fictional-audition-take-01",
+        "source_version": "fictional-take-v1",
+        "accent": "General American",
+        "pronunciation": "All set: ordinary stress on set",
+        "delivery": "Calm after cup contact",
+        "line_id": "line-01",
+        "exact_dialogue": "All set."
+      }
+    ],
+    "replacement_plan": {
+      "approved": false,
+      "payload_version": "fictional-payload-v1",
+      "edit_instructions": "Not selected; if used, replace spoken line with approved take and retain ambience",
+      "timeline_ranges": "Proposed 00:02-00:04; verify unclipped delivery and sync",
+      "ordered_lines": [
+        {
+          "character_id": "fictional-adult-A",
+          "provider": "fictional-provider",
+          "voice_id": "fictional-voice",
+          "voice_type": "generated-take",
+          "take_id": "fictional-audition-take-01",
+          "source_version": "fictional-take-v1",
+          "accent": "General American",
+          "pronunciation": "All set: ordinary stress on set",
+          "delivery": "Calm after cup contact",
+          "line_id": "line-01",
+          "exact_dialogue": "All set."
+        }
+      ]
+    }
+  },
+  "audio": {
+    "state": "unchanged",
+    "replacement_approved": false,
+    "export_version": "fictional-review-v1",
+    "export_asset_id": "fictional-export-asset-v1"
+  },
+  "review": {
+    "export_version": "fictional-review-v1",
+    "method": "unavailable",
+    "actual_export_listened": false,
+    "owner_review_pending": true,
+    "lines": [
+      {
+        "line_id": "line-01",
+        "character_id": "fictional-adult-A",
+        "take_id": "fictional-audition-take-01",
+        "source_version": "fictional-take-v1",
+        "heard_accent": "UNVERIFIED",
+        "heard_words": "UNVERIFIED",
+        "checks": {
+          "voice": "unverified",
+          "accent": "unverified",
+          "words": "unverified",
+          "unclipped_timing": "unverified",
+          "sync": "unverified",
+          "other_speakers": "unverified",
+          "ambience": "unverified",
+          "pronunciation": "unverified",
+          "delivery": "unverified",
+          "sound_effects": "unverified"
+        },
+        "export_range": {
+          "start_seconds": 2,
+          "end_seconds": 4
+        }
+      }
+    ],
+    "listener_id": "UNVERIFIED",
+    "listened_at": "UNVERIFIED",
+    "listened_source_id": "fictional-export-asset-v1",
+    "duration_seconds": 4,
+    "listened_ranges": []
+  },
+  "enhancement": {
+    "requested": false,
+    "picture_edit_approved": false,
+    "picture_edit_version": "fictional-picture-v1",
+    "operation_approved": false,
+    "source_version": "fictional-picture-v1",
+    "output_version": "fictional-enhanced-v1",
+    "settings": {
+      "grading": "none proposed",
+      "sharpening": "none proposed",
+      "upscale": "none proposed"
+    },
+    "paid": false,
+    "fresh_spend_approved": false,
+    "actual_export_compared": false,
+    "comparison_approved": false,
+    "checks": {
+      "identity": "unverified",
+      "faces": "unverified",
+      "artifacts": "unverified",
+      "detail": "unverified",
+      "crop": "unverified",
+      "continuity": "unverified",
+      "timing": "unverified",
+      "audio": "unverified"
+    },
+    "original_retained": false,
+    "editable_retained": false
+  },
+  "release": {
+    "owner_approved": false,
+    "export_version": "fictional-review-v1"
+  },
+  "transition": {
+    "outgoing_endpoint_state": "Cup stationary, hand withdrawing; counter and daylight unchanged",
+    "incoming_angle_size": "Distinct close insert from same side of action axis",
+    "cut_plan": "Cut during hand withdrawal; do not repeat cup placement",
+    "screen_direction": "Withdrawal remains screen right",
+    "eyelines": "Gaze remains down toward cup",
+    "axis_180": "Stay on approved side of counter-to-performer axis",
+    "action_timing": "Continue withdrawal; no repeated contact or frozen overlap",
+    "match_action_edit_handles": "Optional moving handles around withdrawal; verify footage before trimming",
+    "seam_export_version": "fictional-review-v1",
+    "sequential": true,
+    "intent": "new_coverage",
+    "composition_change": "meaningful",
+    "continuous_exception_approved": false,
+    "reference_mode": "state_reference",
+    "fixed_frame_plan": "not_needed",
+    "provider_alternative_supported": false,
+    "trim_handles_verified": false,
+    "normal_speed_reviewed": false,
+    "checks": {
+      "pose": "unverified",
+      "action": "unverified",
+      "voice": "unverified",
+      "sound": "unverified",
+      "timing": "unverified",
+      "no_duplicated_action": "unverified",
+      "no_frozen_overlap": "unverified",
+      "incoming_angle_shot_size": "unverified",
+      "axis_180": "unverified",
+      "screen_direction": "unverified",
+      "eyelines": "unverified",
+      "props_environment": "unverified",
+      "sound_effects": "unverified"
+    },
+    "has_edited_seam": true,
+    "seam_review": {
+      "reviewer_id": "UNVERIFIED",
+      "reviewed_at": "UNVERIFIED",
+      "export_asset_id": "fictional-export-asset-v1",
+      "export_version": "fictional-review-v1",
+      "export_range": {
+        "start_seconds": 1,
+        "end_seconds": 3
+      },
+      "cut_seconds": 2,
+      "outgoing_source": {
+        "asset_id": "fictional-outgoing-clip",
+        "version": "fictional-outgoing-v1",
+        "duration_seconds": 6,
+        "range": {
+          "start_seconds": 4,
+          "end_seconds": 6
+        }
+      },
+      "incoming_source": {
+        "asset_id": "fictional-incoming-clip",
+        "version": "fictional-incoming-v1",
+        "duration_seconds": 6,
+        "range": {
+          "start_seconds": 0,
+          "end_seconds": 2
+        }
+      }
+    }
+  }
+}

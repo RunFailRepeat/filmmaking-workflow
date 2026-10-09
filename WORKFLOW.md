@@ -1,0 +1,81 @@
+# Reference-first production workflow
+
+At the start and end of each work cycle, follow the [owner-selected source contract](PLANNING.md#work-cycle-alignment): inspect the repository version and private brief, capture validated reusable corrections, test the authorized changes, and record results or unresolved issues. Repository-only operation is complete when its scoped checks pass; an excluded plugin must not be loaded, updated or synchronized. Compare additional surfaces only when the owner authorizes that scope. Keep project-specific context private.
+
+## 1. Define the story
+
+Write the character objective, obstacle, visible causal chain and ending. Fix the target edit duration, audience, delivery format and exact dialogue. Time dialogue at its intended delivery speed; leave room for action and reactions.
+
+Use user-defined duration and beat windows rather than a fixed episode range. Apply the [planning coordinate contract](PLANNING.md) to retained source ranges, export ranges and zero/nonzero head trims. Preserve exact dialogue/speaker/order through coverage cuts; silent shots still require continuity and sound planning. Planning checks are never actual-media evidence.
+
+## 2. Build a small approved reference kit
+
+Use one current reference per character unless another view solves a concrete design problem. Track version, role, rights, attribution and approval in an asset ledger. Use opaque asset IDs in shared packets. Never silently replace approved identity, costume or prop design.
+
+Reference readiness also covers recurring wardrobe, locations, complex props and background ensembles when required by the shot. Inspect actual approved, versioned visual references and their supported binding roles; names or structurally complete fields are insufficient. Record missing designs as unresolved. An owner may explicitly authorize a bounded exploratory generation with those gaps disclosed, but it remains an exploratory test, not a production-ready claim; normal execution and spending approvals still apply.
+
+For new identity references, prefer a clean background without labels or competing faces. Check anatomy and plot-critical construction. A still establishes appearance and geometry; it cannot establish successful motion.
+
+For character sheets, record the current user-approved output contract: each requested view type and count, total panels, and allowed versus must-preserve identity, wardrobe, style and composition details. Reference images supply approved source information; their composition does not override explicit output instructions. Before submission, compare the exact final prompt and payload against the current user brief, including the view-count total and permitted changes. Do not add portraits, panels, percentages or geometric layout details unless needed and specified in the brief. Keep project-specific layouts in the project packet; there is no universal character-sheet panel count. This is a human preflight check, not an implemented layout validator.
+
+## 3. Plan shots and transitions
+
+Apply the [voice, camera and finishing gates](CONTINUITY.md). Audition voices per film; approve each character's exact user-heard take/source version as well as provider/ID/type, accent, pronunciation and delivery. No automatic voice reuse or assumed preset/image voice preservation. Keep exact dialogue per line.
+
+Specify camera position/movement, lens or field of view, lighting/look and output aspect ratio. Record exact dialogue plus timing, tone, pacing and pronunciation. Keep these explicit even when references provide appearance.
+
+Also specify framing, focus/depth of field and reshoot continuity. Lens/focal-length descriptions are visual intent, not guaranteed physical optics. Match approved intent or explicitly approve deviations and check actual footage across cuts.
+
+Give every shot a purpose, source duration, usable edit range, start/action/end, camera side, screen direction and sound. Carry momentum, pose, eyelines, object states and support contacts across cuts. Distinguish simultaneous coverage from sequential story time: two angles of one event do not double its story duration.
+
+Separate director intent from mechanical QA. Describe the performance, reaction, pace and purpose of each angle. When requested, begin with natural movement already in progress and preserve its momentum; a start-state description need not be a held opening pose. Keep per-foot/contact inspection details in review notes unless an essential physical constraint must appear in the prompt. Do not turn those checks into a pause or rigid pose that changes the intended performance. Actual playback must establish whether the movement and reaction work.
+
+Use separate coverage when a complicated contact cannot be judged clearly. Multishot scenes are acceptable when geometry and timing remain manageable.
+
+For sequential generated clips, carry the prior ending's character positions/poses/action, props and environment into the next shot without automatically fixing its opening composition. Default to an intentional new angle or meaningful shot-size change, preserving screen direction, eyelines, the 180-degree axis and timing. Avoid tiny camera shifts, duplicated action and frozen overlap. Record outgoing state, incoming angle/cut plan and optional match-on-action/edit handles. State-reference binding is different from literal fixed start-frame conditioning: use supported alternative reference modes/coverage or verified trim handles when a provider forces the first frame. A continuous-shot exception must be explicit. Review the actual seam at normal speed for pose/action/voice/sound before accepting it.
+
+Record actual seam pass/fail/unverified findings for incoming angle/shot size, 180-degree axis, screen direction, eyelines, props/environment and sound-effect preservation; planned intent alone is not review evidence. Continuous-shot exceptions still require findings against the approved continuous intention.
+
+Edited-seam presence is independent of sequential versus simultaneous story time. Record the seam reviewer/date, exact export/cut/range and outgoing/incoming source versions/ranges for every join. Continuous-shot exceptions do not waive the approved voice take or listening evidence. Preserve overlapping dialogue while recording line starts in actual playback order. Complete direct-edit timing/instructions before preflight; unresolved placeholders are not an approved plan.
+
+## 4. Review the exact submission
+
+Use the [prompt auditor and private results ledger](RESULTS.md) before generation. Record an immutable attempt and separate audit; use literal uppercase `CUT` on its own line at every shot transition. A declared audit pass does not authorize execution or spending.
+
+For every speaking shot/reshoot, inspect actual ordered voice/audio payload bindings against the approved takes and versions where supported. Otherwise approve a concrete direct-edit replacement plan with source versions, line coverage, timing and sync/ambience instructions. Removing/changing audio leaves it unresolved until an approved replacement is installed.
+
+Show the exact prompt, actual reference order, supported binding syntax, provider/model/mode, duration, resolution, audio and count. Describe action and physical cause/effect rather than repeating every visual trait. Assess READY / NEEDS DESIGN / HIGH RISK and define indispensable usable seconds.
+
+Inspect estimate-tool side effects before quoting; follow [media-transfer guidance](MEDIA_TRANSFERS.md). Some estimate calls import/confirm URL references despite not generating media. Obtain transfer authority where needed and reuse compatible confirmed IDs or returned prepared parameters after verifying source version and role; do not repeatedly import the same URL. A quote or transfer does not authorize generation.
+
+Prompt approval is separate from spending and execution approval. Record bounded authorization for exact settings/count and any resource or cost limit. A quote is not a provider-enforced cap. No automatic retries, upgrades or subscriptions.
+
+Before any paid generation, obtain a live dated quote for the exact payload, show its expiry/uncertainty and request explicit spending authorization. Keep an immutable ledger of source versions, payload hashes, job IDs, settings and outputs; append corrections instead of overwriting past submissions.
+
+Do not attribute a model failure to prompt length or valid references without evidence. There is no universal prompt-length limit in this workflow. A comparison testing shorter wording must hold model, action, references, duration and settings constant; distinguish observed results from hypotheses.
+
+## 5. Generate only authorized work
+
+Review code and dependencies before local execution. Preserve exact payload/config versions and job identifiers. Verify an uncertain submission's status before retrying. Check each dependent shot's actual ending before requesting the next one.
+
+## 6. Review evidence and repair minimally
+
+Assign the [independent result/failure checker](templates/reviewers.md), distinct from the prompt auditor. Append job/output, observed defects with timestamps, suspected causes with confidence/evidence, owner feedback, costs and acceptance records to the private ledger. Unknown values remain unknown. Link separately authorized retries to the earlier attempt and exact changes; preserve all history.
+
+Watch at normal speed and listen to audio. Inspect critical contacts frame by frame. Record whether evidence is full playback, listened audio, sampled frames or transcript only. Never call sampled stills a full motion review.
+
+Classify ACCEPT / KEEP FRAGMENT / EDIT REPAIR / REPLACE, with source in/out ranges and reasons. Preserve good material. Try authorized trims, cutaways, sound bridges or alternate takes before replacing footage. Editing cannot invent a missing event or repair every anatomy error.
+
+Useful editorial options include a tighter insert crop when a missing offscreen character need not be visible, a shorter action beat that keeps the valid contact, or a distinctly different angle when near-matching camera positions create a jump. Check geography, story meaning, resolution and continuity after each repair; never claim a crop restored an absent interaction.
+
+## 7. Finish and authorize release separately
+
+After picture/edit approval, record grading, sharpening and upscale settings, exact source and output versions, operation approval and fresh approval for any paid work. Compare the actual enhanced export against approved source identity/faces, artifacts/detail, crop, continuity, timing and audio. Keep the original and editable project.
+
+Listen to every line of the actual final export for voice AND accent, exact words/pronunciation/delivery, unclipped timing, sync, other speakers and ambience. ASR is not listening. If listening is unavailable, mark it unverified and retain the owner review gate; do not claim a pass. Enhanced or re-exported media needs its own review.
+
+Record the actual listener, timezone-qualified listening date/time, exact export asset/version, duration, listened time ranges and each line's export range. Listen through the entire export, including sound effects and ambience between lines. Sound-effect preservation requires its own result, separate from ambience. Missing provenance, incomplete listening coverage or unresolved results block recorded release readiness.
+
+Review the real export, first/last frames, crop, borders, exact dialogue, audio and credits. Preserve originals and editable project files externally. Confirm rights and approve the exact output, destination, accompanying text and timing before publication.
+
+Deliver a review export at the agreed native format alongside an editable timeline with linked media/version records. Label review exports clearly; do not replace source masters or silently upscale them.

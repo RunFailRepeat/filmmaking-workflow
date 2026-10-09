@@ -1,0 +1,27 @@
+.env
+.env.*
+*.key
+*.pem
+*.safetensors
+*.ckpt
+*.pt
+*.mp4
+*.mov
+*.wav
+*.png
+*.jpg
+*.log
+models/
+media/
+outputs/
+private/
+.venv/
+__pycache__/
+# Actual production records and SQLite databases never belong in this toolkit.
+local-projects/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*

@@ -1,0 +1,1187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Recorded dialogue continuity and finishing gates; not authenticated approvals",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "shot_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "voices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "provider": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "voice_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "voice_type": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "take_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "source_version": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "accent": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "pronunciation": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "delivery": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "owner_approved": {
+            "type": "boolean"
+          },
+          "user_heard": {
+            "type": "boolean"
+          },
+          "audition_project_id": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "character_id",
+          "provider",
+          "voice_id",
+          "voice_type",
+          "take_id",
+          "source_version",
+          "accent",
+          "pronunciation",
+          "delivery",
+          "owner_approved",
+          "user_heard",
+          "audition_project_id"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "line_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "character_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "exact_dialogue": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "line_id",
+          "character_id",
+          "exact_dialogue"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "camera": {
+      "type": "object",
+      "properties": {
+        "approved": {
+          "type": "object",
+          "properties": {
+            "lens_focal_length_look": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "framing": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "focus_depth_of_field": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "movement": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "lens_focal_length_look",
+            "framing",
+            "focus_depth_of_field",
+            "movement"
+          ],
+          "additionalProperties": false
+        },
+        "submitted": {
+          "type": "object",
+          "properties": {
+            "lens_focal_length_look": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "framing": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "focus_depth_of_field": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "movement": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "lens_focal_length_look",
+            "framing",
+            "focus_depth_of_field",
+            "movement"
+          ],
+          "additionalProperties": false
+        },
+        "change_approved": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "approved",
+        "submitted",
+        "change_approved"
+      ],
+      "additionalProperties": false
+    },
+    "submission": {
+      "type": "object",
+      "properties": {
+        "payload_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "actual_payload_reviewed": {
+          "type": "boolean"
+        },
+        "route": {
+          "enum": [
+            "provider_bindings",
+            "direct_edit"
+          ]
+        },
+        "bindings_supported": {
+          "type": "boolean"
+        },
+        "ordered_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "line_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "character_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "provider": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "voice_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "voice_type": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "take_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "source_version": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "accent": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "pronunciation": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "delivery": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "exact_dialogue": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "line_id",
+              "character_id",
+              "provider",
+              "voice_id",
+              "voice_type",
+              "take_id",
+              "source_version",
+              "accent",
+              "pronunciation",
+              "delivery",
+              "exact_dialogue"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "replacement_plan": {
+          "type": "object",
+          "properties": {
+            "approved": {
+              "type": "boolean"
+            },
+            "payload_version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "edit_instructions": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "timeline_ranges": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "ordered_lines": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "line_id": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "character_id": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "voice_id": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "voice_type": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "take_id": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "source_version": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "accent": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "pronunciation": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "delivery": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "exact_dialogue": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "required": [
+                  "line_id",
+                  "character_id",
+                  "provider",
+                  "voice_id",
+                  "voice_type",
+                  "take_id",
+                  "source_version",
+                  "accent",
+                  "pronunciation",
+                  "delivery",
+                  "exact_dialogue"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "approved",
+            "payload_version",
+            "edit_instructions",
+            "timeline_ranges",
+            "ordered_lines"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "payload_version",
+        "actual_payload_reviewed",
+        "route",
+        "bindings_supported",
+        "ordered_bindings",
+        "replacement_plan"
+      ],
+      "additionalProperties": false
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "unchanged",
+            "removed",
+            "changed",
+            "replaced"
+          ]
+        },
+        "replacement_approved": {
+          "type": "boolean"
+        },
+        "export_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "export_asset_id": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "state",
+        "replacement_approved",
+        "export_version",
+        "export_asset_id"
+      ],
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "properties": {
+        "export_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "method": {
+          "enum": [
+            "direct_listen",
+            "asr",
+            "unavailable"
+          ]
+        },
+        "actual_export_listened": {
+          "type": "boolean"
+        },
+        "owner_review_pending": {
+          "type": "boolean"
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "line_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "character_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "take_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "source_version": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "heard_accent": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "heard_words": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "checks": {
+                "type": "object",
+                "properties": {
+                  "voice": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "accent": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "words": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "unclipped_timing": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "sync": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "other_speakers": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "ambience": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "pronunciation": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "delivery": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  },
+                  "sound_effects": {
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "unverified"
+                    ]
+                  }
+                },
+                "required": [
+                  "voice",
+                  "accent",
+                  "words",
+                  "unclipped_timing",
+                  "sync",
+                  "other_speakers",
+                  "ambience",
+                  "pronunciation",
+                  "delivery",
+                  "sound_effects"
+                ],
+                "additionalProperties": false
+              },
+              "export_range": {
+                "type": "object",
+                "properties": {
+                  "start_seconds": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1.7976931348623157e+308
+                  },
+                  "end_seconds": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "maximum": 1.7976931348623157e+308
+                  }
+                },
+                "required": [
+                  "start_seconds",
+                  "end_seconds"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "line_id",
+              "character_id",
+              "take_id",
+              "source_version",
+              "heard_accent",
+              "heard_words",
+              "checks",
+              "export_range"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "listener_id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "listened_at": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "listened_source_id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "listened_ranges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start_seconds": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1.7976931348623157e+308
+              },
+              "end_seconds": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1.7976931348623157e+308
+              }
+            },
+            "required": [
+              "start_seconds",
+              "end_seconds"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "export_version",
+        "method",
+        "actual_export_listened",
+        "owner_review_pending",
+        "lines",
+        "listener_id",
+        "listened_at",
+        "listened_source_id",
+        "duration_seconds",
+        "listened_ranges"
+      ],
+      "additionalProperties": false
+    },
+    "enhancement": {
+      "type": "object",
+      "properties": {
+        "requested": {
+          "type": "boolean"
+        },
+        "picture_edit_approved": {
+          "type": "boolean"
+        },
+        "picture_edit_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "operation_approved": {
+          "type": "boolean"
+        },
+        "source_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "output_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "grading": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "sharpening": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "upscale": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "grading",
+            "sharpening",
+            "upscale"
+          ],
+          "additionalProperties": false
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "fresh_spend_approved": {
+          "type": "boolean"
+        },
+        "actual_export_compared": {
+          "type": "boolean"
+        },
+        "comparison_approved": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "faces": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "artifacts": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "detail": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "crop": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "continuity": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "timing": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "audio": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            }
+          },
+          "required": [
+            "identity",
+            "faces",
+            "artifacts",
+            "detail",
+            "crop",
+            "continuity",
+            "timing",
+            "audio"
+          ],
+          "additionalProperties": false
+        },
+        "original_retained": {
+          "type": "boolean"
+        },
+        "editable_retained": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "requested",
+        "picture_edit_approved",
+        "picture_edit_version",
+        "operation_approved",
+        "source_version",
+        "output_version",
+        "settings",
+        "paid",
+        "fresh_spend_approved",
+        "actual_export_compared",
+        "comparison_approved",
+        "checks",
+        "original_retained",
+        "editable_retained"
+      ],
+      "additionalProperties": false
+    },
+    "release": {
+      "type": "object",
+      "properties": {
+        "owner_approved": {
+          "type": "boolean"
+        },
+        "export_version": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "owner_approved",
+        "export_version"
+      ],
+      "additionalProperties": false
+    },
+    "transition": {
+      "type": "object",
+      "properties": {
+        "outgoing_endpoint_state": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "incoming_angle_size": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "cut_plan": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "screen_direction": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "eyelines": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "axis_180": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "action_timing": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "match_action_edit_handles": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "seam_export_version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "sequential": {
+          "type": "boolean"
+        },
+        "intent": {
+          "enum": [
+            "new_coverage",
+            "continuous"
+          ]
+        },
+        "composition_change": {
+          "enum": [
+            "meaningful",
+            "tiny",
+            "identical"
+          ]
+        },
+        "continuous_exception_approved": {
+          "type": "boolean"
+        },
+        "reference_mode": {
+          "enum": [
+            "state_reference",
+            "fixed_start_frame"
+          ]
+        },
+        "fixed_frame_plan": {
+          "enum": [
+            "not_needed",
+            "supported_alternative",
+            "verified_trim_handles"
+          ]
+        },
+        "provider_alternative_supported": {
+          "type": "boolean"
+        },
+        "trim_handles_verified": {
+          "type": "boolean"
+        },
+        "normal_speed_reviewed": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "properties": {
+            "pose": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "action": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "voice": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "sound": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "timing": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "no_duplicated_action": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "no_frozen_overlap": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "incoming_angle_shot_size": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "axis_180": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "screen_direction": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "eyelines": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "props_environment": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            },
+            "sound_effects": {
+              "enum": [
+                "pass",
+                "fail",
+                "unverified"
+              ]
+            }
+          },
+          "required": [
+            "pose",
+            "action",
+            "voice",
+            "sound",
+            "timing",
+            "no_duplicated_action",
+            "no_frozen_overlap",
+            "incoming_angle_shot_size",
+            "axis_180",
+            "screen_direction",
+            "eyelines",
+            "props_environment",
+            "sound_effects"
+          ],
+          "additionalProperties": false
+        },
+        "has_edited_seam": {
+          "type": "boolean"
+        },
+        "seam_review": {
+          "type": "object",
+          "properties": {
+            "reviewer_id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "reviewed_at": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "export_asset_id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "export_version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "export_range": {
+              "type": "object",
+              "properties": {
+                "start_seconds": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "end_seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                }
+              },
+              "required": [
+                "start_seconds",
+                "end_seconds"
+              ],
+              "additionalProperties": false
+            },
+            "cut_seconds": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1.7976931348623157e+308
+            },
+            "outgoing_source": {
+              "type": "object",
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "duration_seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "start_seconds": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    },
+                    "end_seconds": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    }
+                  },
+                  "required": [
+                    "start_seconds",
+                    "end_seconds"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "asset_id",
+                "version",
+                "duration_seconds",
+                "range"
+              ],
+              "additionalProperties": false
+            },
+            "incoming_source": {
+              "type": "object",
+              "properties": {
+                "asset_id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "duration_seconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "start_seconds": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    },
+                    "end_seconds": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1.7976931348623157e+308
+                    }
+                  },
+                  "required": [
+                    "start_seconds",
+                    "end_seconds"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "asset_id",
+                "version",
+                "duration_seconds",
+                "range"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "reviewer_id",
+            "reviewed_at",
+            "export_asset_id",
+            "export_version",
+            "export_range",
+            "cut_seconds",
+            "outgoing_source",
+            "incoming_source"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "outgoing_endpoint_state",
+        "incoming_angle_size",
+        "cut_plan",
+        "screen_direction",
+        "eyelines",
+        "axis_180",
+        "action_timing",
+        "match_action_edit_handles",
+        "seam_export_version",
+        "sequential",
+        "intent",
+        "composition_change",
+        "continuous_exception_approved",
+        "reference_mode",
+        "fixed_frame_plan",
+        "provider_alternative_supported",
+        "trim_handles_verified",
+        "normal_speed_reviewed",
+        "checks",
+        "has_edited_seam",
+        "seam_review"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "project_id",
+    "shot_id",
+    "voices",
+    "lines",
+    "camera",
+    "submission",
+    "audio",
+    "review",
+    "enhancement",
+    "release",
+    "transition"
+  ],
+  "additionalProperties": false
+}

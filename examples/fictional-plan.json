@@ -1,0 +1,131 @@
+{
+  "evidence_kind": "planning_only",
+  "duration": {
+    "minimum": 7,
+    "target": 8,
+    "maximum": 9
+  },
+  "beats": [
+    {
+      "id": "place-cup",
+      "start": 0,
+      "end": 5
+    },
+    {
+      "id": "quiet-reaction",
+      "start": 5,
+      "end": 8
+    }
+  ],
+  "clips": [
+    {
+      "id": "A",
+      "source_id": "fictional-source-A",
+      "source_version": "v1",
+      "source_duration": 6,
+      "source_in": 0,
+      "source_out": 4,
+      "export_start": 0,
+      "export_end": 4,
+      "dialogue_mode": "spoken",
+      "start_state": "cup-held",
+      "end_state": "cup-on-counter"
+    },
+    {
+      "id": "B",
+      "source_id": "fictional-source-B",
+      "source_version": "v1",
+      "source_duration": 9,
+      "source_in": 3,
+      "source_out": 5,
+      "export_start": 4,
+      "export_end": 6,
+      "dialogue_mode": "spoken",
+      "start_state": "cup-on-counter",
+      "end_state": "cup-stationary"
+    },
+    {
+      "id": "C",
+      "source_id": "fictional-source-C",
+      "source_version": "v1",
+      "source_duration": 5,
+      "source_in": 1,
+      "source_out": 3,
+      "export_start": 6,
+      "export_end": 8,
+      "dialogue_mode": "silent",
+      "start_state": "cup-stationary",
+      "end_state": "cup-stationary"
+    }
+  ],
+  "seams": [
+    {
+      "outgoing": "A",
+      "incoming": "B",
+      "before": 1,
+      "after": 1,
+      "export_window": {
+        "start": 3,
+        "end": 5
+      },
+      "outgoing_source_window": {
+        "start": 3,
+        "end": 4
+      },
+      "incoming_source_window": {
+        "start": 3,
+        "end": 4
+      }
+    },
+    {
+      "outgoing": "B",
+      "incoming": "C",
+      "before": 1,
+      "after": 1,
+      "export_window": {
+        "start": 5,
+        "end": 7
+      },
+      "outgoing_source_window": {
+        "start": 4,
+        "end": 5
+      },
+      "incoming_source_window": {
+        "start": 1,
+        "end": 2
+      }
+    }
+  ],
+  "approved_dialogue": [
+    {
+      "id": "line-01",
+      "speaker": "fictional-adult",
+      "text": "All set.",
+      "start": 3,
+      "end": 5
+    }
+  ],
+  "dialogue_coverage": [
+    {
+      "id": "line-01",
+      "speaker": "fictional-adult",
+      "text": "All set.",
+      "segments": [
+        {
+          "clip": "A",
+          "export_start": 3,
+          "export_end": 4,
+          "source_start": 3,
+          "source_end": 4
+        },
+        {
+          "clip": "B",
+          "export_start": 4,
+          "export_end": 5,
+          "source_start": 3,
+          "source_end": 4
+        }
+      ]
+    }
+  ]
+}

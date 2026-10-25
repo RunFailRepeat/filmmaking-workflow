@@ -1,6 +1,6 @@
 # Jev prompt-compliance adapter — offline, not activated
 
-[jev_audit.py](jev_audit.py) prepares a TypeSafe System One request and validates/routes synthetic responses. It has **no network transport**, reads no credentials, installs nothing, and never writes an approval or changes the production ledger. `--mode live` always blocks. This is a foundation for eventual Jev use, not a completed live integration or proof that Jev catches the supplied failure cases.
+[jev_audit.py](jev_audit.py) prepares a TypeSafe System One request and validates/routes synthetic responses. It has **no network transport**, reads no credentials, installs nothing, and never writes an approval or changes the production ledger. `--mode live` always blocks. This offline module does not prove that Jev catches the supplied failure cases. The separate [HTTPS scene client](JEV_SCENE_CLIENT.md) adds an explicit callable transport and experimental sampled-frame request path; it does not change this module’s dry-run/fixture behavior or activate access.
 
 ## Contract and evidence
 

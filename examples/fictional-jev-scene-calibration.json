@@ -1,0 +1,44 @@
+{
+  "fixture_notice": "Wholly synthetic smoke-trial proposal. Not an executed Jev response, representative calibration dataset, private footage, account verification or live authorization.",
+  "image_recipe": {
+    "format": "png_rgb8_stored_deflate_v1",
+    "width": 280,
+    "height": 280,
+    "rgb": [
+      128,
+      128,
+      128
+    ]
+  },
+  "image_sha256": "ed12e0d225b68b75e0b2550865a2b5c96470f944917eb69ab1de98bb1ab718a0",
+  "image_size_bytes": 235563,
+  "bundle": {
+    "metadata": {
+      "repo_commit": "f9b46d1065ea8c302c6516b7776e42b8183b43be",
+      "scene_intent": {
+        "version": "synthetic-v1",
+        "text": "A flat grey surface is visible.",
+        "sha256": "4b1b2c34bf48152358418bb00dd8b2794d8714112e07a60329a233a4ed24c250"
+      },
+      "frame": {
+        "source_id": "synthetic-frame-v1",
+        "source_sha256": "ed12e0d225b68b75e0b2550865a2b5c96470f944917eb69ab1de98bb1ab718a0",
+        "sample_time_seconds": 0
+      }
+    },
+    "current": {
+      "metadata_sha256": "fefa4715219ff1a66041b8443cb192a3478d27e2f5ca57d4d78a40577752d929",
+      "frame_sha256": "ed12e0d225b68b75e0b2550865a2b5c96470f944917eb69ab1de98bb1ab718a0"
+    }
+  },
+  "request_sha256": "85314208dfc4960bb02ea4a4ef1d3c6054648b3d020e86a0f78dc56617f75e1c",
+  "questions_sha256": "1ea8ef7f3a9934db9681364dfb192f52bd54324c05e8dd926b523d3668046e9a",
+  "proposed_manual_labels": {
+    "visible_defect": false,
+    "intent_readable": true,
+    "evidence_insufficient": false
+  },
+  "label_notice": "Qualitative expectations for a uniform grey synthetic image, not model scores or independently adjudicated calibration labels. Verify the generated image before a separately approved trial.",
+  "proposed_one_attempt_risk_budget_usd": "0.01",
+  "live_authorization": null
+}

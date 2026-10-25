@@ -12,6 +12,8 @@ Inspect the exact prepared prompt, ordered references and actual supported paylo
 
 Complete the [reference-binding and distinct-performance checklist](reference-performance-audit.md) against the actual assets, ordered provider payload and neighboring shots. Attach the completed private record as audit evidence: use the existing reference/binding/performance checks, and mark missing mapping, uncertain notation or unreviewed differences unresolved. These checks are human judgments; the schema does not parse provider reference tokens or prove visual/performance correctness.
 
+For owner-requested Jev assistance, follow the [offline adapter and activation boundary](../JEV_AUDIT.md). Its current dry runs and fixture replays are not actual Jev verification; live access, bounded cost and calibration remain unresolved. Attach any receipt only as supplementary evidence, retain independent review, and never let semantic probabilities override mandatory checks or owner restrictions.
+
 Return pass / revise / unverified, one result per schema check, specific findings and evidence. Save an `audit` record bound to the immutable attempt before any job begins, and run the prompt gate. An amended prompt/payload needs a new attempt and appropriate prompt version plus a fresh audit. Quote/transfer side effects, spending and execution permission remain separate gates.
 
 ## Result/failure checker — after output or provider failure

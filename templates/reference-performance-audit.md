@@ -11,13 +11,14 @@ Primary notation source and date checked / evidence strength / unresolved questi
 
 For every generated subject, inspect the actual approved assets and fill a row for each required role. A role missing an approved reference remains unresolved; bounded exploration requires the existing explicit exploration decision. Do not invent hashes, UUIDs or approvals.
 
-| Internal alias | Visible identity anchors and shot role | Reference role (identity, wardrobe, prop, etc.) | Source asset/version and SHA-256 | Actual payload attachment position, UUID and API role | Provider image ordinal and exact prompt notation | Prompt phrase assigning subject/role |
+| Internal alias | Private audit: visible identity anchors and shot role | Reference role (identity, wardrobe, prop, etc.) | Source asset/version and SHA-256 | Actual payload attachment position, UUID and API role | Provider image ordinal and exact prompt notation | Prompt phrase assigning subject/role |
 | --- | --- | --- | --- | --- | --- | --- |
 | TBD | TBD | TBD | TBD | TBD | TBD | TBD |
 
 - Match each row to the exact ordered provider attachment, not a filename or remembered character name. For mixed media, record both payload position and provider image ordinal; do not assume they are identical. Inspect prepared/normalized bindings where available. Uncertain ordering is unresolved.
 - API binding selects the media asset. Model-visible prompt notation explains how that reference participates in the shot. Neither a UUID in a ledger nor a name in prose establishes both. Check that each subject/role phrase points to the intended actual attachment and that no unsupported tags were invented.
-- Names may remain useful aliases after explicit mapping. Give enough visible anchors and a clear role to identify the actual subject; let the reference supply detailed appearance instead of re-describing every trait. A face-only reference does not establish wardrobe approval.
+- Names may remain useful aliases after explicit mapping. Record visible identity anchors for private audit traceability; do not automatically copy them into generation prose. Identify the subject with supported reference notation and a clear role, adding visual anchors only where needed to resolve ambiguity. A face-only reference does not establish wardrobe approval.
+- When the attached approved reference already defines unchanged wardrobe, omit redundant descriptions of its color from the generation prompt. Bind that reference and direct the new action/performance. If the owner approves a wardrobe change, explicitly describe the requested new outfit (for example, new beach outfits) and scope the reference to identity or other unchanged roles; do not accidentally preserve its old clothing. This is not a universal ban on visual descriptions. In either case retain the exact UUID/order/hash mapping and supported ordinal notation in the audit.
 - Remove irrelevant named negative constraints when that character/reference is not in the shot. Describe the intended subject count and roles positively when needed. Keep genuinely relevant, brief-supported constraints; do not apply a lexical name ban.
 
 ## Provider notation evidence

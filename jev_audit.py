@@ -1,5 +1,6 @@
 """Offline TypeSafe request/response adapter. No network, credentials or approval writes."""
 import argparse
+import copy
 import hashlib
 import json
 import math
@@ -10,9 +11,9 @@ MODEL = 'jev-1.14.0'
 ENDPOINT = 'https://api.typesafe.ai/v1/systemone'
 QUESTIONS = {
     'reference_mapping': 'Does the prompt omit or contradict a subject-to-reference role mapping in the ordered reference manifest?',
-    'intent_action': 'Where the brief requires different responses, does the prompt repeat the same intent/action across sequential subjects instead?',
-    'gesture': 'Where the brief requires different responses, does the prompt fail to distinguish their gestures?',
-    'eyeline': 'Where the brief requires different responses, does the prompt fail to distinguish their eyelines?',
+    'intent_action': 'Does the prompt omit or contradict any subject-specific intent/action required by the authoritative brief or shot plan, or fail to differentiate subjects\' intent/actions where the brief requires different responses?',
+    'gesture': 'Does the prompt omit or contradict any subject-specific gesture required by the authoritative brief or shot plan, or fail to differentiate subjects\' gestures where the brief requires different responses?',
+    'eyeline': 'Does the prompt omit or contradict any subject-specific eyeline required by the authoritative brief or shot plan, or fail to differentiate subjects\' eyelines where the brief requires different responses?',
     'timing': 'Does the prompt or shot plan place an essential performance outside its retained window, or omit the brief-required distinct response timing?',
     'owner_corrections': 'Does the prompt fail to implement any applicable latest owner correction?',
     'wardrobe': 'Does the prompt redundantly describe unchanged wardrobe color already established by the approved reference, or preserve old clothing despite an approved outfit change?',
@@ -130,7 +131,7 @@ def assess(state, current, gates, *, mode='dry_run', replay=None, policy=None):
         request = build_request(state, current)
         state_hash = digest(state)
         receipt.update(state_sha256=state_hash, request_sha256=digest(request),
-                       questions_sha256=digest(request['questions']), source_hashes=current,
+                       questions_sha256=digest(request['questions']), source_hashes=copy.deepcopy(current),
                        prompt_sha256=digest(state['payload']['prompt']), requested_model=MODEL)
         keys(gates, {'state_sha256', 'checks'})
         require(gates['state_sha256'] == state_hash, 'stale mandatory checks')
@@ -144,7 +145,7 @@ def assess(state, current, gates, *, mode='dry_run', replay=None, policy=None):
         require(replay['request_sha256'] == digest(request), 'stale response')
         probabilities = parse_response(replay['response'])
         receipt.update(response_sha256=digest(replay['response']), returned_model=replay['response']['model'],
-                       usage=replay['response']['usage'], probabilities=probabilities,
+                       usage=copy.deepcopy(replay['response']['usage']), probabilities=probabilities,
                        evidence_kind='synthetic_fixture_not_Jev_verification')
         require(policy is not None, 'uncalibrated deployment: no routing policy')
         keys(policy, {'model', 'questions_sha256', 'rules_sha256', 'evaluation_sha256', 'thresholds', 'scope'})

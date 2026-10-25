@@ -18,6 +18,7 @@ def reseal(b):
     for k in ('payload', 'references', 'shots'): b['current'][k+'_sha256'] = digest(s[k])
     b['gates']['state_sha256'] = digest(s)
     b['replay']['request_sha256'] = digest({'model': b['policy']['model'], 'state': s, 'questions': questions()})
+    b['policy']['questions_sha256'] = digest(questions())
 
 
 def run(b, **kwargs):
@@ -41,6 +42,8 @@ class JevAuditChecks(unittest.TestCase):
                     b['current']['owner_corrections_sha256'] = digest('new correction not supplied')
                 if 'violation' in case:
                     b['replay']['response']['answers'][case['violation']]['noul'] = .99
+                for criterion in case.get('violations', []):
+                    b['replay']['response']['answers'][criterion]['noul'] = .99
                 result = run(b)
                 self.assertEqual(result['route'], case['expected'])
                 self.assertFalse(result['jev_verified'])
@@ -59,34 +62,84 @@ class JevAuditChecks(unittest.TestCase):
                 # Include target identity, actual boundary numbers and protected beats in
                 # the model-visible state; no ability to identify unseen footage is implied.
                 state['brief']['text'] = json.dumps({k: case[k] for k in
-                    ('approved_target', 'protected_beats', 'required_sequence')}, sort_keys=True)
+                    ('approved_target', 'protected_beats', 'protected_looks', 'required_sequence')}, sort_keys=True)
                 proposal = {k: variant[k] for k in
-                    ('target_identity', 'removed_frames', 'retained_frames', 'sequence')}
+                    ('target_identity', 'removed_frames', 'retained_frames', 'sequence', 'look_assignments')}
                 state['payload']['settings']['edit_scope'] = proposal
                 # Synthetic new-closeup plan ends on the arrival character.
                 state['shots'].reverse()
                 state['payload']['prompt'] = (
                     'Reference roles: @image1 courier identity/approved look; '
-                    '@image2 guard identity/approved look. Restore both approved looks. '
+                    '@image2 guard identity/approved look. '
                     'Proposed edit with source-frame boundaries: ' + json.dumps(proposal, sort_keys=True))
                 reseal(b)
                 # External deterministic gate example, deliberately independent of Jev.
                 # This only compares this fixture plan; it is not an implemented editor.
                 exact = (proposal['removed_frames'] == [case['approved_target']['frame_interval']]
                          and proposal['retained_frames'] == [x['frame_interval'] for x in case['protected_beats']]
-                         and proposal['sequence'] == case['required_sequence'])
+                         and proposal['sequence'] == case['required_sequence']
+                         and proposal['look_assignments'] == case['protected_looks'])
                 b['gates']['checks']['exact_invariants'] = 'pass' if exact else 'fail'
                 b['gates']['checks']['owner_restrictions'] = (
                     'pass' if proposal['target_identity'] == 'confirmed' else 'unverified')
                 b['replay']['response']['answers']['owner_corrections']['noul'] = variant['synthetic_violation_probability']
                 request = build_request(state, b['current'])
                 self.assertIn('protected_beats', request['state']['brief']['text'])
+                self.assertEqual(json.loads(request['state']['brief']['text'])['protected_looks'],
+                                 case['protected_looks'])
                 self.assertEqual(request['state']['payload']['settings']['edit_scope'], proposal)
                 result = run(b)
                 self.assertEqual(result['route'], variant['expected'])
                 self.assertFalse(result['execution_allowed'])
                 self.assertFalse(result['jev_verified'])
                 self.assertTrue(result['independent_review_required'])
+
+    def test_edit_scope_look_failure_is_isolated_and_authoritative(self):
+        b = fixture(); case = b['edit_scope_case']
+        variants = {v['id']: v for v in case['variants']}
+        good = variants['corrected_narrow_removal']
+        bad = variants['changed_protected_look']
+        for field in ('target_identity', 'removed_frames', 'retained_frames', 'sequence',
+                      'synthetic_violation_probability'):
+            self.assertEqual(bad[field], good[field])
+        self.assertEqual(good['look_assignments'], case['protected_looks'])
+        self.assertNotEqual(bad['look_assignments'], case['protected_looks'])
+        refs = {r['subject']: r for r in b['state']['references']}
+        self.assertEqual({x['subject'] for x in case['protected_looks']}, set(refs))
+        self.assertEqual({x['beat_id'] for x in case['protected_looks']}, set(case['required_sequence']))
+        for look in case['protected_looks']:
+            self.assertEqual(look['reference_uuid'], refs[look['subject']]['uuid'])
+            self.assertEqual(look['reference_sha256'], refs[look['subject']]['source_sha256'])
+
+    def test_subject_specific_questions_cover_requirements_and_differentiation(self):
+        b = fixture(); req = build_request(b['state'], b['current'])
+        for name, term in (('intent_action', 'intent/action'), ('gesture', 'gesture'), ('eyeline', 'eyeline')):
+            with self.subTest(criterion=name):
+                question = req['questions'][name]['instructions']['question']
+                self.assertIn('omit or contradict any subject-specific ' + term, question)
+                self.assertIn('required by the authoritative brief or shot plan', question)
+                self.assertIn('or fail to differentiate subjects\' ' + term, question)
+                self.assertIn('where the brief requires different responses', question)
+                # Do not rely on question IDs being passed to the model.
+                self.assertIn(term, question)
+
+    def test_subject_mismatch_fixtures_change_only_the_candidate(self):
+        b = fixture(); base = b['state']['payload']['prompt']
+        cases = {c['id']: c for c in b['cases']}
+        changes = {
+            'intent_action': ('exhales with relief', 'stiffens with alarm'),
+            'gesture': ('opens a palm', 'raises a fist'),
+            'eyeline': ('looking down at the parcel', 'looking up at the ceiling'),
+        }
+        for criterion, (old, new) in changes.items():
+            case = cases['isolated_' + criterion + '_mismatch']
+            self.assertEqual(case['prompt'], base.replace(old, new))
+            self.assertEqual(case['violation'], criterion)
+            self.assertNotIn('correction', case)
+        swapped = cases['swapped_but_distinct_performances']
+        self.assertEqual(set(swapped['violations']), set(changes))
+        self.assertIn('courier leans back suspiciously, folds both arms, and looks toward the doorway', swapped['prompt'])
+        self.assertIn('guard exhales with relief, opens a palm, looking down at the parcel', swapped['prompt'])
 
     def test_fictional_prompts_preserve_existing_cut_invariant(self):
         b = fixture()
@@ -178,6 +231,18 @@ class JevAuditChecks(unittest.TestCase):
         self.assertEqual(r['response_sha256'],digest(b['replay']['response']))
         self.assertEqual(r['returned_model'],b['policy']['model'])
         self.assertEqual(r['evidence_kind'],'synthetic_fixture_not_Jev_verification')
+
+    def test_receipt_evidence_is_detached_from_caller_mutation(self):
+        for mode in ('dry_run', 'fixture_replay'):
+            with self.subTest(mode=mode):
+                b = fixture(); r = run(b, mode=mode)
+                original = copy.deepcopy(r)
+                b['current']['payload_sha256'] = digest('changed after return')
+                b['replay']['response']['usage']['input_tokens'] += 1
+                self.assertEqual(r, original)
+                self.assertIsNot(r['source_hashes'], b['current'])
+                if mode == 'fixture_replay':
+                    self.assertIsNot(r['usage'], b['replay']['response']['usage'])
 
 
 if __name__ == '__main__': unittest.main()

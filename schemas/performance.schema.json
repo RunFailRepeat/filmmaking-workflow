@@ -1,0 +1,803 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "performance.schema.json",
+  "title": "Recorded performance continuity evidence; not an audio quality assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_kind",
+    "status",
+    "dependent_visuals_ready",
+    "character_id",
+    "approved_performance",
+    "provider_contract",
+    "canonical_lines",
+    "candidate",
+    "audio_bridge"
+  ],
+  "properties": {
+    "evidence_kind": {
+      "type": "string",
+      "enum": [
+        "synthetic_fixture",
+        "production_record"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "accepted"
+      ]
+    },
+    "dependent_visuals_ready": {
+      "type": "boolean"
+    },
+    "character_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "approved_performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "provider",
+        "model",
+        "voice_id",
+        "control_cues",
+        "spoken_text",
+        "review",
+        "reference_start",
+        "reference_end",
+        "voice_type",
+        "parameters"
+      ],
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "version",
+            "uri",
+            "sha256"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "uri": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "provider": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "model": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "voice_id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "control_cues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "minItems": 0
+        },
+        "spoken_text": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "comparison_source",
+            "method",
+            "listener",
+            "reviewed_at",
+            "start",
+            "end",
+            "status",
+            "owner_approved",
+            "checks",
+            "owner_heard",
+            "owner_identity",
+            "owner_review_evidence"
+          ],
+          "properties": {
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "version",
+                "uri",
+                "sha256"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "uri": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "comparison_source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "version",
+                "uri",
+                "sha256"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "uri": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "direct_listening",
+                "not_listened"
+              ]
+            },
+            "listener": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "reviewed_at": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "start": {
+              "type": "number",
+              "minimum": 0
+            },
+            "end": {
+              "type": "number",
+              "minimum": 0
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "rejected",
+                "unverified"
+              ]
+            },
+            "owner_approved": {
+              "type": "boolean"
+            },
+            "checks": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "identity",
+                "delivery",
+                "words",
+                "unclipped",
+                "continuity",
+                "accent",
+                "pronunciation",
+                "intelligibility",
+                "control_leakage",
+                "normal_speed"
+              ],
+              "properties": {
+                "identity": {
+                  "type": "boolean"
+                },
+                "delivery": {
+                  "type": "boolean"
+                },
+                "words": {
+                  "type": "boolean"
+                },
+                "unclipped": {
+                  "type": "boolean"
+                },
+                "continuity": {
+                  "type": "boolean"
+                },
+                "accent": {
+                  "type": "boolean"
+                },
+                "pronunciation": {
+                  "type": "boolean"
+                },
+                "intelligibility": {
+                  "type": "boolean"
+                },
+                "control_leakage": {
+                  "type": "boolean"
+                },
+                "normal_speed": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "owner_heard": {
+              "type": "boolean"
+            },
+            "owner_identity": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "owner_review_evidence": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          }
+        },
+        "reference_start": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reference_end": {
+          "type": "number",
+          "minimum": 0
+        },
+        "voice_type": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "value": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "provider_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "checked_at",
+        "provider",
+        "model",
+        "control_cues_supported",
+        "parameters",
+        "ssml_breaks_supported"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "checked_at": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "provider": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "model": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "control_cues_supported": {
+          "type": "boolean"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value",
+              "supported"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "value": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "supported": {
+                "type": "boolean"
+              }
+            }
+          },
+          "minItems": 0
+        },
+        "ssml_breaks_supported": {
+          "type": "boolean"
+        }
+      }
+    },
+    "canonical_lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "character_id",
+          "spoken_text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "character_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "spoken_text": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "provider",
+        "model",
+        "voice_id",
+        "parameters",
+        "lines",
+        "review",
+        "voice_type"
+      ],
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "version",
+            "uri",
+            "sha256"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "uri": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "provider": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "model": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "voice_id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "value"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "value": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          },
+          "minItems": 0
+        },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "character_id",
+              "spoken_text",
+              "control_cues",
+              "provider_text"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "character_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "spoken_text": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "control_cues": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "minItems": 0
+              },
+              "provider_text": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "comparison_source",
+            "method",
+            "listener",
+            "reviewed_at",
+            "start",
+            "end",
+            "status",
+            "owner_approved",
+            "checks",
+            "owner_heard",
+            "owner_identity",
+            "owner_review_evidence"
+          ],
+          "properties": {
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "version",
+                "uri",
+                "sha256"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "uri": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "comparison_source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "version",
+                "uri",
+                "sha256"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "version": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "uri": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "direct_listening",
+                "not_listened"
+              ]
+            },
+            "listener": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "reviewed_at": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "start": {
+              "type": "number",
+              "minimum": 0
+            },
+            "end": {
+              "type": "number",
+              "minimum": 0
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "rejected",
+                "unverified"
+              ]
+            },
+            "owner_approved": {
+              "type": "boolean"
+            },
+            "checks": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "identity",
+                "delivery",
+                "words",
+                "unclipped",
+                "continuity",
+                "accent",
+                "pronunciation",
+                "intelligibility",
+                "control_leakage",
+                "normal_speed"
+              ],
+              "properties": {
+                "identity": {
+                  "type": "boolean"
+                },
+                "delivery": {
+                  "type": "boolean"
+                },
+                "words": {
+                  "type": "boolean"
+                },
+                "unclipped": {
+                  "type": "boolean"
+                },
+                "continuity": {
+                  "type": "boolean"
+                },
+                "accent": {
+                  "type": "boolean"
+                },
+                "pronunciation": {
+                  "type": "boolean"
+                },
+                "intelligibility": {
+                  "type": "boolean"
+                },
+                "control_leakage": {
+                  "type": "boolean"
+                },
+                "normal_speed": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "owner_heard": {
+              "type": "boolean"
+            },
+            "owner_identity": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "owner_review_evidence": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          }
+        },
+        "voice_type": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      }
+    },
+    "audio_bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "source_start",
+        "source_end",
+        "export_start",
+        "export_end",
+        "line_ranges",
+        "picture_cuts"
+      ],
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "version",
+            "uri",
+            "sha256"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "uri": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "source_start": {
+          "type": "number",
+          "minimum": 0
+        },
+        "source_end": {
+          "type": "number",
+          "minimum": 0
+        },
+        "export_start": {
+          "type": "number",
+          "minimum": 0
+        },
+        "export_end": {
+          "type": "number",
+          "minimum": 0
+        },
+        "line_ranges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "line_id",
+              "source_start",
+              "source_end",
+              "export_start",
+              "export_end"
+            ],
+            "properties": {
+              "line_id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "source_start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "source_end": {
+                "type": "number",
+                "minimum": 0
+              },
+              "export_start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "export_end": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "picture_cuts": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minItems": 0
+        }
+      }
+    }
+  }
+}

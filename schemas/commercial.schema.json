@@ -1,0 +1,682 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Commercial production declarations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_kind",
+    "status",
+    "source_cap_seconds",
+    "final_runtime_seconds",
+    "sources",
+    "required_reference_roles",
+    "references",
+    "owner_verdict",
+    "prompt_approved",
+    "design_approved",
+    "rights_approved",
+    "request_validated",
+    "payload_sha256",
+    "quote",
+    "budget",
+    "social",
+    "research"
+  ],
+  "properties": {
+    "evidence_kind": {
+      "type": "string",
+      "enum": [
+        "synthetic_fixture",
+        "production_record"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "submission_ready",
+        "accepted",
+        "rejected"
+      ]
+    },
+    "source_cap_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "final_runtime_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "duration_seconds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "duration_seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "required_reference_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "\\S"
+      },
+      "minItems": 0
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "artifact_id",
+          "provider_id",
+          "sha256",
+          "approved"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "artifact_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "provider_id": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "approved": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "owner_verdict": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    },
+    "prompt_approved": {
+      "type": "boolean"
+    },
+    "design_approved": {
+      "type": "boolean"
+    },
+    "rights_approved": {
+      "type": "boolean"
+    },
+    "request_validated": {
+      "type": "boolean"
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "quote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "payload_sha256",
+        "total",
+        "unit",
+        "checked_at",
+        "evidence"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "price_only",
+            "final_payload"
+          ]
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "total": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "checked_at": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "evidence": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorized",
+        "evidence",
+        "payload_sha256",
+        "maximum",
+        "unit",
+        "requires_hard_cap",
+        "hard_cap_verified"
+      ],
+      "properties": {
+        "authorized": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "payload_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maximum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "requires_hard_cap": {
+          "type": "boolean"
+        },
+        "hard_cap_verified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact",
+        "reviewer",
+        "reviewed_at",
+        "independent",
+        "picture_method",
+        "picture_complete",
+        "audio_method",
+        "audio_complete",
+        "checks"
+      ],
+      "properties": {
+        "artifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "version",
+            "sha256"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "reviewer": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "independent": {
+          "type": "boolean"
+        },
+        "picture_method": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "frames_only",
+            "normal_speed_viewing"
+          ]
+        },
+        "picture_complete": {
+          "type": "boolean"
+        },
+        "audio_method": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "waveform_only",
+            "transcript_only",
+            "direct_listening"
+          ]
+        },
+        "audio_complete": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "product_action",
+            "identity",
+            "contact",
+            "comprehension",
+            "pacing",
+            "seams",
+            "sound",
+            "attribution",
+            "cta",
+            "rights",
+            "format"
+          ],
+          "properties": {
+            "product_action": {
+              "type": "boolean"
+            },
+            "identity": {
+              "type": "boolean"
+            },
+            "contact": {
+              "type": "boolean"
+            },
+            "comprehension": {
+              "type": "boolean"
+            },
+            "pacing": {
+              "type": "boolean"
+            },
+            "seams": {
+              "type": "boolean"
+            },
+            "sound": {
+              "type": "boolean"
+            },
+            "attribution": {
+              "type": "boolean"
+            },
+            "cta": {
+              "type": "boolean"
+            },
+            "rights": {
+              "type": "boolean"
+            },
+            "format": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "owner_heard_and_watched": {
+      "type": "boolean"
+    },
+    "owner_review_evidence": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "owner_review_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phone_first",
+        "composition",
+        "mobile_readability_planned",
+        "immediate_visual_hook_planned",
+        "motivated_cuts_planned",
+        "muted_comprehension_planned"
+      ],
+      "properties": {
+        "phone_first": {
+          "type": "boolean"
+        },
+        "composition": {
+          "type": "string",
+          "enum": [
+            "native_9_16",
+            "landscape_crop",
+            "other"
+          ]
+        },
+        "mobile_readability_planned": {
+          "type": "boolean"
+        },
+        "immediate_visual_hook_planned": {
+          "type": "boolean"
+        },
+        "motivated_cuts_planned": {
+          "type": "boolean"
+        },
+        "muted_comprehension_planned": {
+          "type": "boolean"
+        },
+        "destination": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "safe_guide_source": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "safe_guide_checked_at": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "safe_regions_verified": {
+          "type": "boolean"
+        },
+        "mobile_faces_hands_product_readable": {
+          "type": "boolean"
+        },
+        "hook_and_cuts_reviewed": {
+          "type": "boolean"
+        },
+        "caption_brand_overlays_clear": {
+          "type": "boolean"
+        },
+        "muted_comprehension_reviewed": {
+          "type": "boolean"
+        },
+        "sound_cleared": {
+          "type": "boolean"
+        },
+        "clean_export_reviewed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "research": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "access_review",
+        "sources",
+        "applications",
+        "third_party_material_copied"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "reviewed"
+          ]
+        },
+        "access_review": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "title",
+              "author",
+              "link",
+              "access_route",
+              "access",
+              "checked_at",
+              "read_sections",
+              "creative_viewed",
+              "creative_heard",
+              "creative_coverage",
+              "metric_kind",
+              "metric_evidence",
+              "metric_scope",
+              "conclusion",
+              "limits",
+              "lawful_use",
+              "access_limitation",
+              "alternative_source_ids"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "campaign",
+                  "academic",
+                  "public_alternative"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "author": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "link": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "access_route": {
+                "type": "string",
+                "enum": [
+                  "ku",
+                  "library",
+                  "public"
+                ]
+              },
+              "access": {
+                "type": "string",
+                "enum": [
+                  "queued",
+                  "read",
+                  "unavailable"
+                ]
+              },
+              "checked_at": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "read_sections": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "\\S"
+                }
+              },
+              "creative_viewed": {
+                "type": "boolean"
+              },
+              "creative_heard": {
+                "type": "boolean"
+              },
+              "creative_coverage": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "metric_kind": {
+                "type": "string",
+                "enum": [
+                  "popularity",
+                  "business_outcome",
+                  "not_reported"
+                ]
+              },
+              "metric_evidence": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "metric_scope": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "conclusion": {
+                "type": "string",
+                "enum": [
+                  "popularity_only",
+                  "business_outcome_reported",
+                  "unknown"
+                ]
+              },
+              "limits": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "lawful_use": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "access_limitation": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "alternative_source_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "\\S"
+                }
+              }
+            }
+          }
+        },
+        "applications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dimension",
+              "basis",
+              "source_ids",
+              "change",
+              "verification_plan"
+            ],
+            "properties": {
+              "dimension": {
+                "type": "string",
+                "enum": [
+                  "hook",
+                  "physical_action",
+                  "cuts",
+                  "pacing",
+                  "sound",
+                  "payoff"
+                ]
+              },
+              "basis": {
+                "type": "string",
+                "enum": [
+                  "research_supported_principle",
+                  "creative_hypothesis"
+                ]
+              },
+              "source_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "\\S"
+                }
+              },
+              "change": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "verification_plan": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          }
+        },
+        "third_party_material_copied": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "evidence_kind": "synthetic_fixture",
+  "status": "accepted",
+  "source_cap_seconds": 20,
+  "final_runtime_seconds": 10,
+  "sources": [
+    {
+      "id": "fictional-source-one",
+      "duration_seconds": 6
+    },
+    {
+      "id": "fictional-source-two",
+      "duration_seconds": 6
+    }
+  ],
+  "required_reference_roles": [
+    "adult_performer",
+    "product",
+    "environment"
+  ],
+  "references": [
+    {
+      "role": "adult_performer",
+      "artifact_id": "fictional-adult_performer",
+      "provider_id": "fictional-provider-adult_performer",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "approved": true
+    },
+    {
+      "role": "product",
+      "artifact_id": "fictional-product",
+      "provider_id": "fictional-provider-product",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "approved": true
+    },
+    {
+      "role": "environment",
+      "artifact_id": "fictional-environment",
+      "provider_id": "fictional-provider-environment",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "approved": true
+    }
+  ],
+  "owner_verdict": "approved",
+  "prompt_approved": true,
+  "design_approved": true,
+  "rights_approved": true,
+  "request_validated": true,
+  "payload_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "quote": {
+    "kind": "final_payload",
+    "payload_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "total": 2,
+    "unit": "fictional_credits",
+    "checked_at": "2026-01-01T12:00:00Z",
+    "evidence": "fictional-quote"
+  },
+  "budget": {
+    "authorized": true,
+    "evidence": "fictional-budget",
+    "payload_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "maximum": 2,
+    "unit": "fictional_credits",
+    "requires_hard_cap": false,
+    "hard_cap_verified": false
+  },
+  "output": {
+    "id": "fictional-output",
+    "version": "1",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "review": {
+    "artifact": {
+      "id": "fictional-output",
+      "version": "1",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "reviewer": "fictional-independent-reviewer",
+    "reviewed_at": "2026-01-01T12:05:00Z",
+    "independent": true,
+    "picture_method": "normal_speed_viewing",
+    "picture_complete": true,
+    "audio_method": "direct_listening",
+    "audio_complete": true,
+    "checks": {
+      "product_action": true,
+      "identity": true,
+      "contact": true,
+      "comprehension": true,
+      "pacing": true,
+      "seams": true,
+      "sound": true,
+      "attribution": true,
+      "cta": true,
+      "rights": true,
+      "format": true
+    }
+  },
+  "owner_heard_and_watched": true,
+  "owner_review_evidence": "fictional-owner-review",
+  "owner_review_artifact": {
+    "id": "fictional-output",
+    "version": "1",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "social": {
+    "phone_first": true,
+    "composition": "native_9_16",
+    "mobile_readability_planned": true,
+    "immediate_visual_hook_planned": true,
+    "motivated_cuts_planned": true,
+    "muted_comprehension_planned": true,
+    "destination": "fictional-social-placement",
+    "safe_guide_source": "urn:fictional:placement-guide:1",
+    "safe_guide_checked_at": "2026-01-01T12:00:00Z",
+    "safe_regions_verified": true,
+    "mobile_faces_hands_product_readable": true,
+    "hook_and_cuts_reviewed": true,
+    "caption_brand_overlays_clear": true,
+    "muted_comprehension_reviewed": true,
+    "sound_cleared": true,
+    "clean_export_reviewed": true
+  },
+  "research": {
+    "status": "reviewed",
+    "access_review": "Synthetic access inventory only; no real KU or Library reading claimed",
+    "sources": [
+      {
+        "author": "Fictional research author",
+        "link": "https://example.invalid/research",
+        "access_route": "public",
+        "access": "read",
+        "checked_at": "2026-01-01T11:00:00Z",
+        "read_sections": [
+          "Fictional summary section only"
+        ],
+        "creative_viewed": false,
+        "creative_heard": false,
+        "creative_coverage": "No creative viewed or heard; text review only",
+        "metric_kind": "not_reported",
+        "metric_evidence": "No business outcome data supplied",
+        "metric_scope": "No measurement claim",
+        "conclusion": "unknown",
+        "limits": "Synthetic record, no empirical evidence or real research",
+        "lawful_use": "Original notes only; no source media or expression copied",
+        "access_limitation": "No access limitation in synthetic example",
+        "alternative_source_ids": [],
+        "id": "fictional-campaign",
+        "kind": "campaign",
+        "title": "Fictional social campaign record"
+      },
+      {
+        "author": "Fictional research author",
+        "link": "https://example.invalid/research",
+        "access_route": "public",
+        "access": "read",
+        "checked_at": "2026-01-01T11:00:00Z",
+        "read_sections": [
+          "Fictional summary section only"
+        ],
+        "creative_viewed": false,
+        "creative_heard": false,
+        "creative_coverage": "No creative viewed or heard; text review only",
+        "metric_kind": "not_reported",
+        "metric_evidence": "No business outcome data supplied",
+        "metric_scope": "No measurement claim",
+        "conclusion": "unknown",
+        "limits": "Synthetic record, no empirical evidence or real research",
+        "lawful_use": "Original notes only; no source media or expression copied",
+        "access_limitation": "No access limitation in synthetic example",
+        "alternative_source_ids": [],
+        "id": "fictional-study",
+        "kind": "academic",
+        "title": "Fictional academic study record"
+      }
+    ],
+    "applications": [
+      {
+        "dimension": "hook",
+        "basis": "creative_hypothesis",
+        "source_ids": [
+          "fictional-campaign",
+          "fictional-study"
+        ],
+        "change": "Fictional proposed hook change for the selected treatment",
+        "verification_plan": "Compare actual output with the selected treatment and owner response"
+      },
+      {
+        "dimension": "physical_action",
+        "basis": "creative_hypothesis",
+        "source_ids": [
+          "fictional-campaign",
+          "fictional-study"
+        ],
+        "change": "Fictional proposed physical_action change for the selected treatment",
+        "verification_plan": "Compare actual output with the selected treatment and owner response"
+      },
+      {
+        "dimension": "cuts",
+        "basis": "creative_hypothesis",
+        "source_ids": [
+          "fictional-campaign",
+          "fictional-study"
+        ],
+        "change": "Fictional proposed cuts change for the selected treatment",
+        "verification_plan": "Compare actual output with the selected treatment and owner response"
+      },
+      {
+        "dimension": "pacing",
+        "basis": "creative_hypothesis",
+        "source_ids": [
+          "fictional-campaign",
+          "fictional-study"
+        ],
+        "change": "Fictional proposed pacing change for the selected treatment",
+        "verification_plan": "Compare actual output with the selected treatment and owner response"
+      },
+      {
+        "dimension": "sound",
+        "basis": "creative_hypothesis",
+        "source_ids": [
+          "fictional-campaign",
+          "fictional-study"
+        ],
+        "change": "Fictional proposed sound change for the selected treatment",
+        "verification_plan": "Compare actual output with the selected treatment and owner response"
+      },
+      {
+        "dimension": "payoff",
+        "basis": "creative_hypothesis",
+        "source_ids": [
+          "fictional-campaign",
+          "fictional-study"
+        ],
+        "change": "Fictional proposed payoff change for the selected treatment",
+        "verification_plan": "Compare actual output with the selected treatment and owner response"
+      }
+    ],
+    "third_party_material_copied": false
+  }
+}

@@ -3,6 +3,9 @@
 A reference-first planning and review kit for AI-assisted shorts. It helps define shots, preserve continuity, review actual footage and control approvals. It does not generate media or authorize spending.
 
 - [Workflow](WORKFLOW.md)
+- [Required character/prop assignments and production consumption](templates/reference-performance-audit.md#required-entity-check-and-workflow-consumption)
+- [Company-profile-led advertisements and declaration gates](COMMERCIAL.md)
+- [Performance preservation and heard acceptance](PERFORMANCE.md), [focused research sources](RESEARCH_SOURCES.md), and [review worksheet](templates/performance-review.md)
 - [Jev prompt-compliance adapter — offline preparation and synthetic routing only](JEV_AUDIT.md)
 - [Jev HTTPS scene client — explicit activation and sampled-frame limits](JEV_SCENE_CLIENT.md)
 - [Prompt auditor, independent result checker and private SQLite results store](RESULTS.md), [reviewer briefs](templates/reviewers.md) and [import schema](schemas/results.schema.json), plus [independent findings](schemas/findings.schema.json)
@@ -25,6 +28,9 @@ python check_packet.py templates/production.md
 python validate_shot.py examples/fictional-shot.json
 python validate_plan.py examples/fictional-plan.json
 python validate_continuity.py examples/fictional-continuity.json preflight
+python validate_performance.py examples/fictional-performance.json acceptance
+python validate_commercial.py examples/fictional-commercial.json
+python validate_reference_bindings.py examples/fictional-reference-bindings.json
 ```
 
 The templates intentionally fail readiness because fields or approvals are unresolved. Fill a copy outside this public repository. The continuity validator has preflight, enhancement and release stages. It checks declared voice/take bindings, camera changes, final-listening records and enhancement approvals; it never listens to media or authenticates approvals. The basic packet checker checks explicit fields and approval markers, not creative quality or rights validity.

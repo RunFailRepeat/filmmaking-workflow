@@ -1,0 +1,199 @@
+{
+  "evidence_kind": "synthetic_fixture",
+  "status": "accepted",
+  "dependent_visuals_ready": true,
+  "character_id": "fictional-announcer",
+  "approved_performance": {
+    "source": {
+      "id": "fictional-approved",
+      "version": "1",
+      "uri": "urn:fictional:approved:1",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "provider": "fictional-provider",
+    "model": "fictional-model",
+    "voice_id": "fictional-voice",
+    "control_cues": [
+      "[excited]"
+    ],
+    "spoken_text": "The doors are open!",
+    "review": {
+      "source": {
+        "id": "fictional-approved",
+        "version": "1",
+        "uri": "urn:fictional:approved:1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "comparison_source": {
+        "id": "fictional-approved",
+        "version": "1",
+        "uri": "urn:fictional:approved:1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "method": "direct_listening",
+      "listener": "fictional-listener",
+      "reviewed_at": "2026-01-01T12:00:00Z",
+      "start": 0,
+      "end": 2,
+      "status": "approved",
+      "owner_approved": true,
+      "checks": {
+        "identity": true,
+        "delivery": true,
+        "words": true,
+        "unclipped": true,
+        "continuity": true,
+        "accent": true,
+        "pronunciation": true,
+        "intelligibility": true,
+        "control_leakage": true,
+        "normal_speed": true
+      },
+      "owner_heard": true,
+      "owner_identity": "fictional-owner",
+      "owner_review_evidence": "urn:fictional:owner-review:fictional-approved:1"
+    },
+    "reference_start": 0,
+    "reference_end": 2,
+    "voice_type": "fictional-preset",
+    "parameters": [
+      {
+        "name": "stability",
+        "value": "0.3"
+      }
+    ]
+  },
+  "provider_contract": {
+    "source": "urn:fictional:contract:1",
+    "checked_at": "2026-01-01T11:00:00Z",
+    "provider": "fictional-provider",
+    "model": "fictional-model",
+    "control_cues_supported": true,
+    "parameters": [
+      {
+        "name": "stability",
+        "value": "0.3",
+        "supported": true
+      }
+    ],
+    "ssml_breaks_supported": false
+  },
+  "canonical_lines": [
+    {
+      "id": "line-1",
+      "character_id": "fictional-announcer",
+      "spoken_text": "Choose your path."
+    },
+    {
+      "id": "line-2",
+      "character_id": "fictional-announcer",
+      "spoken_text": "Watch the signal."
+    }
+  ],
+  "candidate": {
+    "source": {
+      "id": "fictional-candidate",
+      "version": "2",
+      "uri": "urn:fictional:candidate:2",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "provider": "fictional-provider",
+    "model": "fictional-model",
+    "voice_id": "fictional-voice",
+    "parameters": [
+      {
+        "name": "stability",
+        "value": "0.3"
+      }
+    ],
+    "lines": [
+      {
+        "id": "line-1",
+        "character_id": "fictional-announcer",
+        "spoken_text": "Choose your path.",
+        "control_cues": [
+          "[excited]"
+        ],
+        "provider_text": "[excited] Choose your path."
+      },
+      {
+        "id": "line-2",
+        "character_id": "fictional-announcer",
+        "spoken_text": "Watch the signal.",
+        "control_cues": [
+          "[excited]"
+        ],
+        "provider_text": "[excited] Watch the signal."
+      }
+    ],
+    "review": {
+      "source": {
+        "id": "fictional-candidate",
+        "version": "2",
+        "uri": "urn:fictional:candidate:2",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "comparison_source": {
+        "id": "fictional-approved",
+        "version": "1",
+        "uri": "urn:fictional:approved:1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "method": "direct_listening",
+      "listener": "fictional-listener",
+      "reviewed_at": "2026-01-01T12:00:00Z",
+      "start": 0,
+      "end": 6,
+      "status": "approved",
+      "owner_approved": true,
+      "checks": {
+        "identity": true,
+        "delivery": true,
+        "words": true,
+        "unclipped": true,
+        "continuity": true,
+        "accent": true,
+        "pronunciation": true,
+        "intelligibility": true,
+        "control_leakage": true,
+        "normal_speed": true
+      },
+      "owner_heard": true,
+      "owner_identity": "fictional-owner",
+      "owner_review_evidence": "urn:fictional:owner-review:fictional-candidate:2"
+    },
+    "voice_type": "fictional-preset"
+  },
+  "audio_bridge": {
+    "source": {
+      "id": "fictional-candidate",
+      "version": "2",
+      "uri": "urn:fictional:candidate:2",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "source_start": 0,
+    "source_end": 6,
+    "export_start": 10,
+    "export_end": 16,
+    "line_ranges": [
+      {
+        "line_id": "line-1",
+        "source_start": 0,
+        "source_end": 2,
+        "export_start": 10,
+        "export_end": 12
+      },
+      {
+        "line_id": "line-2",
+        "source_start": 3,
+        "source_end": 6,
+        "export_start": 13,
+        "export_end": 16
+      }
+    ],
+    "picture_cuts": [
+      11,
+      14
+    ]
+  }
+}

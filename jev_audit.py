@@ -63,12 +63,18 @@ def validate_state(state, current):
     require(isinstance(state['references'], list) and bool(state['references']), 'missing reference mapping')
     expected_medias = []
     subjects = set()
-    for ref in state['references']:
+    for position, ref in enumerate(state['references'], 1):
         keys(ref, {'subject', 'uuid', 'role', 'source_sha256', 'ordinal', 'notation', 'audit_description'})
         for key in ('subject', 'uuid', 'role', 'notation', 'audit_description'): text(ref[key])
         sha(ref['source_sha256'])
-        require(type(ref['ordinal']) is int and ref['ordinal'] > 0, 'invalid ordinal')
-        require(ref['notation'] in state['payload']['prompt'], 'missing prompt reference notation')
+        require(type(ref['ordinal']) is int and ref['ordinal'] == position,
+                'ordinal must match ordered attachment position')
+        # Local audit conventions backed by examples, not a provider parser contract.
+        require(ref['notation'] in (f'@image{position}', f'@Image {position}'),
+                'unsupported local notation or ordinal mismatch')
+        require(re.search(r'(?<![\w@])' + re.escape(ref['notation']) + r'(?!\w)',
+                          state['payload']['prompt']) is not None,
+                'missing exact prompt reference notation')
         subjects.add(ref['subject'])
         expected_medias.append({'role': ref['role'], 'value': ref['uuid']})
     require(state['payload']['medias'] == expected_medias, 'wrong reference order or binding')

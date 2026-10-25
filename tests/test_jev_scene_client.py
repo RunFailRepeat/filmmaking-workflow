@@ -69,6 +69,20 @@ def frame_request():
     return client.build_frame_request(data, *frame_inputs(data))
 
 
+def box_inputs(data):
+    metadata, current = frame_inputs(data)
+    target = 'a red coffee mug'
+    metadata['localization_target'] = {'version': 'synthetic-target-v1', 'text': target,
+                                       'sha256': jev_audit.digest(target)}
+    current['metadata_sha256'] = jev_audit.digest(metadata)
+    return metadata, current
+
+
+def box_request():
+    data = png()
+    return client.build_box_request(data, *box_inputs(data))
+
+
 def approval(prepared):
     now = datetime.now(timezone.utc)
     return {'authorization_id': '11111111-1111-4111-8111-111111111111',
@@ -89,7 +103,9 @@ def models():
 
 def answer(prepared):
     return {'model': client.MODEL,
-            'answers': {key: {'type': 'noul', 'noul': .25} for key in prepared.as_dict()['questions']},
+            'answers': {key: ({'type': 'box', 'box': {'left': .1, 'right': .8, 'top': .2, 'bottom': .9},
+                              'confidence': .8} if question['type'] == 'box' else {'type': 'noul', 'noul': .25})
+                        for key, question in prepared.as_dict()['questions'].items()},
             'usage': {'input_tokens': 200, 'output_tokens': 3}}
 
 
@@ -107,7 +123,7 @@ def assess_mock(prepared, response=None, authorize=None):
 
 class SceneClientChecks(unittest.TestCase):
     def test_dry_run_is_usable_and_never_reads_credentials_or_network(self):
-        for prepared in (text_request(), frame_request()):
+        for prepared in (text_request(), frame_request(), box_request()):
             with patch.object(client.os.environ, 'get', side_effect=AssertionError('credentials read')), \
                     patch.object(client, '_https_request', side_effect=AssertionError('network')):
                 receipt = client.assess(prepared).as_dict()
@@ -166,7 +182,7 @@ class SceneClientChecks(unittest.TestCase):
             with self.assertRaisesRegex(client.ClientError, 'repeated_asset_reference'):
                 client.build_frame_request(data, metadata, current)
 
-    def test_box_request_and_response_are_explicitly_unsupported(self):
+    def test_box_answers_cannot_be_substituted_for_frame_quality_questions(self):
         prepared = frame_request(); request = prepared.as_dict()
         request['questions']['visible_defect'] = {'type': 'box', 'instructions': 'The object in the still.'}
         altered = client.PreparedRequest(prepared.kind, client.encoded(request), prepared.source_hashes)
@@ -179,6 +195,86 @@ class SceneClientChecks(unittest.TestCase):
         result, transport = assess_mock(prepared, response)
         self.assertEqual(result.as_dict()['status'], 'uncertain')
         self.assertEqual(transport.call_count, 2)
+
+    def test_box_builder_pairs_independent_presence_and_one_target_location(self):
+        prepared = box_request(); request = prepared.as_dict()
+        self.assertEqual(request['model'], 'jev-1.14.0')
+        self.assertEqual(set(request['questions']), {'target_present', 'target_box'})
+        presence = request['questions']['target_present']; box = request['questions']['target_box']
+        self.assertEqual(presence['type'], 'noul')
+        self.assertIn('a red coffee mug', presence['instructions']['question'])
+        self.assertIn('frame.asset', presence['instructions']['question'])
+        self.assertEqual(set(box), {'type', 'instructions'}); self.assertEqual(box['type'], 'box')
+        self.assertIn('a red coffee mug', box['instructions']); self.assertIn('frame.asset', box['instructions'])
+        self.assertEqual(set(request['assets']), {request['state']['frame']['asset']})
+        data = png(); metadata, current = box_inputs(data)
+        metadata['localization_target']['text'] = 'a green bottle'
+        with self.assertRaisesRegex(client.ClientError, 'target_hash_mismatch'):
+            client.build_box_request(data, metadata, current)
+
+    def test_absent_uncertain_and_high_presence_never_activate_a_box(self):
+        prepared = box_request()
+        for presence in (0, .01, .5, .99, 1):
+            response = answer(prepared); response['answers']['target_present']['noul'] = presence
+            response['answers']['target_box']['confidence'] = 1
+            receipt, _ = assess_mock(prepared, response)
+            result = receipt.as_dict()
+            self.assertEqual(result['status'], 'independent_review')
+            self.assertEqual(result['localization']['box_use'], 'ignored_pending_independent_review')
+            self.assertIsNone(result['localization']['active_box'])
+            self.assertFalse(result['localization']['calibrated_policy'])
+            self.assertFalse(result['execution_allowed'])
+            self.assertEqual(result['response']['answers'], response['answers'])
+            self.assertNotIn('not_found', result['response']['answers']['target_box'])
+
+    def test_box_bounds_order_confidence_and_version_are_strict(self):
+        prepared = box_request(); invalid = []
+        for edge in ('left', 'right', 'top', 'bottom'):
+            for value in (-.1, 1.1, True, None, '0.2'):
+                response = answer(prepared); response['answers']['target_box']['box'][edge] = value
+                invalid.append(response)
+        for edges in ({'left': .8, 'right': .8, 'top': .2, 'bottom': .9},
+                      {'left': .9, 'right': .1, 'top': .2, 'bottom': .9},
+                      {'left': .1, 'right': .8, 'top': .9, 'bottom': .9},
+                      {'left': .1, 'right': .8, 'top': .9, 'bottom': .2}):
+            response = answer(prepared); response['answers']['target_box']['box'] = edges; invalid.append(response)
+        for confidence in (-1, 2, True, None, '0.8'):
+            response = answer(prepared); response['answers']['target_box']['confidence'] = confidence
+            invalid.append(response)
+        for version in ('jev-1.13.0', 'jev-latest', 'jev-1.14.1'):
+            response = answer(prepared); response['model'] = version; invalid.append(response)
+        response = answer(prepared); del response['answers']['target_present']; invalid.append(response)
+        response = answer(prepared); response['answers']['target_box']['not_found'] = True; invalid.append(response)
+        for response in invalid:
+            receipt, _ = assess_mock(prepared, response)
+            self.assertEqual(receipt.as_dict()['status'], 'uncertain')
+            self.assertNotIn('raw_response_base64', receipt.as_dict())
+            self.assertNotIn('localization', receipt.as_dict())
+        for value in (float('nan'), float('inf')):
+            response = answer(prepared); response['answers']['target_box']['box']['left'] = value
+            with self.assertRaises(client.ClientError):
+                client._parse_answers(response, prepared.as_dict()['questions'])
+        response = answer(prepared)
+        response['answers']['target_box']['box'] = {'left': 0, 'right': 1, 'top': 0, 'bottom': 1}
+        receipt, _ = assess_mock(prepared, response)
+        self.assertEqual(receipt.as_dict()['status'], 'independent_review')
+        with patch.object(client, 'MODEL', 'jev-1.13.0'), self.assertRaisesRegex(client.ClientError, 'unsupported_box_model'):
+            data = png(); client.build_box_request(data, *box_inputs(data))
+
+    def test_raw_valid_response_bytes_and_box_evidence_are_immutable(self):
+        prepared = box_request(); response = answer(prepared)
+        raw = b'\n ' + json.dumps(response, indent=3).encode() + b' \n'
+        transport = Mock(side_effect=[(200, client.encoded(models())), (200, raw)])
+        receipt = client.assess(prepared, mode='mock', authorization=approval(prepared), mock_transport=transport)
+        result = receipt.as_dict()
+        self.assertEqual(base64.b64decode(result['raw_response_base64']), raw)
+        self.assertEqual(result['raw_response_sha256'], client.sha_bytes(raw))
+        snapshot = receipt.body
+        response['answers']['target_box']['box']['left'] = .7
+        result['response']['answers']['target_box']['box']['left'] = .6
+        result['raw_response_base64'] = 'changed'
+        self.assertEqual(receipt.body, snapshot)
+        self.assertEqual(receipt.as_dict()['response']['answers']['target_box']['box']['left'], .1)
 
     def test_png_rejects_unsupported_corrupt_animated_and_oversized_inputs(self):
         bad_crc = bytearray(png()); bad_crc[-1] ^= 1
@@ -261,7 +357,7 @@ class SceneClientChecks(unittest.TestCase):
         self.assertEqual(receipt['reason'], 'mock_transport_forbidden_in_live_mode')
 
     def test_mock_success_provenance_headers_cost_and_unknowns(self):
-        for prepared in (text_request(), frame_request()):
+        for prepared in (text_request(), frame_request(), box_request()):
             receipt, transport = assess_mock(prepared)
             result = receipt.as_dict()
             self.assertEqual(result['status'], 'independent_review')
@@ -275,9 +371,10 @@ class SceneClientChecks(unittest.TestCase):
                              [('GET', '/v1/models'), ('POST', '/v1/systemone')])
             self.assertEqual(set(transport.call_args_list[0].args[2]), {'Authorization', 'Accept'})
             headers = transport.call_args_list[1].args[2]
-            self.assertEqual('TypeSafe-Danger-Zone-Images' in headers, prepared.kind == 'sampled_frame')
+            is_image = prepared.kind in ('sampled_frame', 'sampled_box')
+            self.assertEqual('TypeSafe-Danger-Zone-Images' in headers, is_image)
             expected_headers = {'Authorization', 'Accept', 'Content-Type'}
-            if prepared.kind == 'sampled_frame':
+            if is_image:
                 expected_headers.add('TypeSafe-Danger-Zone-Images')
                 self.assertEqual(headers['TypeSafe-Danger-Zone-Images'], 'true')
             self.assertEqual(set(headers), expected_headers)
@@ -285,12 +382,40 @@ class SceneClientChecks(unittest.TestCase):
 
     def test_model_access_checked_before_post(self):
         prepared = text_request()
-        for response in ({'models': []}, {'models': [{'name': 'other', 'description': 'test', 'release_date': 'today'}]},
-                         {'models': [], 'extra': 'unexpected'}, {'models': [{'name': client.MODEL}]}):
+        for response in ({'models': [], 'extra': 'unexpected'}, {'models': [{'name': client.MODEL}]}):
             transport = Mock(return_value=(200, client.encoded(response)))
             result = client.assess(prepared, mode='mock', authorization=approval(prepared), mock_transport=transport).as_dict()
             self.assertEqual(result['status'], 'blocked'); self.assertFalse(result['post_attempted'])
             self.assertEqual(transport.call_count, 1)
+
+    def test_alias_only_metadata_allows_pin_but_pinned_response_is_still_required(self):
+        prepared = box_request()
+        listing = {'models': [{'name': 'jev-latest', 'description': 'alias metadata', 'release_date': '2026-10-14'}]}
+        for response_model in (client.MODEL, 'jev-latest', 'jev-1.13.0'):
+            response = answer(prepared); response['model'] = response_model
+            transport = Mock(side_effect=[(200, client.encoded(listing)), (200, client.encoded(response))])
+            result = client.assess(prepared, mode='mock', authorization=approval(prepared), mock_transport=transport).as_dict()
+            self.assertEqual(transport.call_count, 2); self.assertFalse(result['pinned_model_listed'])
+            self.assertEqual(result['status'], 'independent_review' if response_model == client.MODEL else 'uncertain')
+            self.assertEqual(json.loads(transport.call_args_list[1].args[3])['model'], 'jev-1.14.0')
+
+    def test_frozen_authorization_is_rechecked_after_metadata_before_post(self):
+        prepared = box_request(); authorize = approval(prepared)
+        start = datetime.now(timezone.utc)
+        authorize['approved_at'] = (start - timedelta(seconds=10)).isoformat()
+        authorize['expires_at'] = (start + timedelta(seconds=10)).isoformat()
+        def metadata_response(*args):
+            # Mutating the caller's approval must not extend the frozen approval.
+            authorize['expires_at'] = (start + timedelta(minutes=20)).isoformat()
+            return 200, client.encoded(models())
+        transport = Mock(side_effect=metadata_response)
+        with patch.object(client, 'datetime', wraps=datetime) as clock:
+            clock.now.side_effect = [start, start + timedelta(seconds=20)]
+            result = client.assess(prepared, mode='mock', authorization=authorize, mock_transport=transport).as_dict()
+        self.assertEqual(result['status'], 'blocked')
+        self.assertEqual(result['reason'], 'expired_or_invalid_authorization')
+        self.assertFalse(result['post_attempted']); self.assertFalse(result['billing_outcome_uncertain'])
+        self.assertEqual(transport.call_count, 1)
 
     def test_timeout_429_and_redirect_never_retry_and_post_uncertainty_is_retained(self):
         prepared = text_request()

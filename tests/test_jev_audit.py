@@ -224,6 +224,31 @@ class JevAuditChecks(unittest.TestCase):
         b=fixture(); b['state']['shots'][0]['subject']='absent'; reseal(b)
         self.assertEqual(run(b)['route'],'blocked')
 
+    def test_exact_reference_ordinals_and_notation_fail_closed(self):
+        for replacement in ('@image10', '@image1suffix', 'prefix@image1', '@@image1'):
+            with self.subTest(replacement=replacement):
+                b = fixture()
+                b['state']['payload']['prompt'] = b['state']['payload']['prompt'].replace('@image1', replacement)
+                reseal(b)
+                self.assertEqual(run(b)['route'], 'blocked')
+        for ordinal, notation in ((2, '@image1'), (1, '@image2'), (1, '@image10'), (True, '@image1')):
+            b = fixture()
+            b['state']['references'][0].update(ordinal=ordinal, notation=notation)
+            reseal(b)
+            self.assertEqual(run(b)['route'], 'blocked')
+        b = fixture(); b['state']['references'][1]['ordinal'] = 1; reseal(b)
+        self.assertEqual(run(b)['route'], 'blocked')
+
+    def test_documented_local_spellings_with_punctuation(self):
+        for spellings in (('@image1', '@image2'), ('@Image 1', '@Image 2')):
+            b = fixture()
+            for ref, spelling in zip(b['state']['references'], spellings):
+                b['state']['payload']['prompt'] = b['state']['payload']['prompt'].replace(
+                    ref['notation'], '(' + spelling + '),')
+                ref['notation'] = spelling
+            reseal(b)
+            self.assertEqual(run(b)['route'], 'independent_review')
+
     def test_receipt_provenance(self):
         b=fixture(); r=run(b)
         self.assertEqual(r['usage'],b['replay']['response']['usage'])
@@ -237,6 +262,7 @@ class JevAuditChecks(unittest.TestCase):
             with self.subTest(mode=mode):
                 b = fixture(); r = run(b, mode=mode)
                 original = copy.deepcopy(r)
+                b['current']['repo_commit'] = '0' * 40
                 b['current']['payload_sha256'] = digest('changed after return')
                 b['replay']['response']['usage']['input_tokens'] += 1
                 self.assertEqual(r, original)

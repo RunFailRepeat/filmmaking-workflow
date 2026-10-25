@@ -4,6 +4,7 @@ A reference-first planning and review kit for AI-assisted shorts. It helps defin
 
 - [Workflow](WORKFLOW.md)
 - [Jev prompt-compliance adapter — offline preparation and synthetic routing only](JEV_AUDIT.md)
+- [Jev HTTPS scene client — explicit activation and sampled-frame limits](JEV_SCENE_CLIENT.md)
 - [Prompt auditor, independent result checker and private SQLite results store](RESULTS.md), [reviewer briefs](templates/reviewers.md) and [import schema](schemas/results.schema.json), plus [independent findings](schemas/findings.schema.json)
 - [Planning duration/coverage contracts and owner-selected workflow sources](PLANNING.md), [planning schema](schemas/plan.schema.json), [fictional plan](examples/fictional-plan.json), and [work-cycle record](templates/work-cycle.md)
 - [Content analytics definitions and exploratory timing proposal](ANALYTICS.md)
@@ -34,4 +35,4 @@ This repository contains reusable guidance, original utility code and synthetic 
 
 Public availability does not grant rights to third-party models or assets. No third-party source code, model weights or private production material is distributed.
 
-Roadmap: evaluate the private results ledger against a real approved production packet and add editable-timeline interchange schemas validated with actual reviewed exports. No provider integration, footage QA automation or production-quality result is implemented. The JSON Schema defines field constraints; validate_shot.py also checks edit duration against source duration. Neither verifies approvals or media.
+Roadmap: evaluate the private results ledger against a real approved production packet and add editable-timeline interchange schemas validated with actual reviewed exports. The optional Jev client is a callable, opt-in prototype with mock-tested transport; no live account access, calibrated scene acceptance, footage QA automation or production-quality result is established. The JSON Schema defines field constraints; validate_shot.py also checks edit duration against source duration. Neither verifies approvals or media.

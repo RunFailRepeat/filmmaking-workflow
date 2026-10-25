@@ -1,6 +1,6 @@
 # Jev prompt-compliance adapter — offline, not activated
 
-[jev_audit.py](jev_audit.py) prepares a TypeSafe System One request and validates/routes synthetic responses. It has **no network transport**, reads no credentials, installs nothing, and never writes an approval or changes the production ledger. `--mode live` always blocks. This is a foundation for eventual Jev use, not a completed live integration or proof that Jev catches the supplied failure cases.
+[jev_audit.py](jev_audit.py) prepares a TypeSafe System One request and validates/routes synthetic responses. It has **no network transport**, reads no credentials, installs nothing, and never writes an approval or changes the production ledger. `--mode live` always blocks. This offline module does not prove that Jev catches the supplied failure cases. The separate [HTTPS scene client](JEV_SCENE_CLIENT.md) adds an explicit callable transport and experimental sampled-frame request path; it does not change this module’s dry-run/fixture behavior or activate access.
 
 ## Contract and evidence
 
@@ -28,7 +28,7 @@ A separately maintained `current` snapshot pins the repository commit and hashes
 
 `gates` binds the external mandatory check results to the entire state hash. All seven named checks must be `pass`: `asset_bytes`, `provider_bindings`, `provider_notation`, `exact_invariants`, `owner_restrictions`, `cost`, `permissions`. These are trusted caller evidence declarations, not authenticated approvals. Existing tools and reviewers must compare actual bytes, bindings, exact dialogue/settings, price limits and authority; Jev cannot supply these passes. The adapter additionally compares ordered media entries against the manifest, validates timing containment and source hashes, and rejects mismatched current pins.
 
-The local notation check only tests substring presence, and ordinals are only checked as positive integers. It does not parse provider tokens, enforce ordinal sequence/uniqueness or rule out prefix collisions such as `@image1` inside `@image10`. Provider-specific notation and ordinal-to-attachment validation remain unresolved here and mandatory in the external `provider_notation` and `provider_bindings` checks; this adapter does not define a provider token grammar.
+The local audit accepts two example-backed spellings, `@imageN` and `@Image N`, with N equal to the one-based position in the ordered attachment manifest. It rejects duplicate/wrong ordinals, notation-number mismatches and embedded token collisions such as `@image1` inside `@image10` or a word. These conservative local boundaries are not a claimed provider parser grammar or a universal notation requirement. Other conventions require an explicit reviewed adapter update. The mandatory external `provider_notation` and `provider_bindings` checks still verify applicability to the actual provider/version and submitted attachments; local token membership cannot establish subject identity or provider interpretation.
 
 State is deliberately limited to this review. Do not include API keys, credentials, unrelated notes, full conversations, local paths or media URLs. The top-level allowlist is not a secret scanner: callers must inspect allowed text/settings fields too before any future transfer. No private state is sent anywhere by this implementation.
 

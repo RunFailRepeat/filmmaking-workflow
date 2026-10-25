@@ -1,0 +1,47 @@
+# Reference-binding and distinct-performance audit
+
+Keep completed records private. This supplements the [reviewer briefs](reviewers.md) and [immutable attempt ledger](../RESULTS.md); it does not authorize uploads, generation or spending.
+
+Attempt ID / exact prompt version and SHA-256:
+Exact payload snapshot and hash / model, provider, version and mode:
+Current brief version/hash / reviewer / UTC time:
+Primary notation source and date checked / evidence strength / unresolved questions:
+
+## Subject and attachment mapping
+
+For every generated subject, inspect the actual approved assets and fill a row for each required role. A role missing an approved reference remains unresolved; bounded exploration requires the existing explicit exploration decision. Do not invent hashes, UUIDs or approvals.
+
+| Internal alias | Visible identity anchors and shot role | Reference role (identity, wardrobe, prop, etc.) | Source asset/version and SHA-256 | Actual payload attachment position, UUID and API role | Provider image ordinal and exact prompt notation | Prompt phrase assigning subject/role |
+| --- | --- | --- | --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+- Match each row to the exact ordered provider attachment, not a filename or remembered character name. For mixed media, record both payload position and provider image ordinal; do not assume they are identical. Inspect prepared/normalized bindings where available. Uncertain ordering is unresolved.
+- API binding selects the media asset. Model-visible prompt notation explains how that reference participates in the shot. Neither a UUID in a ledger nor a name in prose establishes both. Check that each subject/role phrase points to the intended actual attachment and that no unsupported tags were invented.
+- Names may remain useful aliases after explicit mapping. Give enough visible anchors and a clear role to identify the actual subject; let the reference supply detailed appearance instead of re-describing every trait. A face-only reference does not establish wardrobe approval.
+- Remove irrelevant named negative constraints when that character/reference is not in the shot. Describe the intended subject count and roles positively when needed. Keep genuinely relevant, brief-supported constraints; do not apply a lexical name ban.
+
+## Provider notation evidence
+
+Verified 2026-10-25 from primary sources:
+
+- [Higgsfield Seedance 2.5 comparison examples](https://higgsfield.ai/blog/seedance-2-5) use `@image1` and `@image2` in ACTIVE REFERENCES and shot descriptions. Use this example-backed convention for the applicable Higgsfield Seedance workflow after matching its current attachment order. The article also demonstrates the prompts on Seedance 2.0; this is not a compatibility guarantee for every mode/version.
+- [ByteDance Seedance 2.5 introduction](https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5) uses `@Image 1`. This establishes another primary example convention, not proof that capitalization or spacing is interchangeable across providers.
+- The inspected Higgsfield MCP `generate_video` contract accepts ordered `params.medias` entries with `role` and `value` (media UUID), and maps canonical roles to model-specific backend keys. The current Seedance mapping normalizes `image` to `image_references`. Preserve the actual selected model contract and prepared mapping in the private audit evidence; recheck on provider/version changes. This contract exposes no formal prompt-token parser grammar.
+
+These are example-backed notation and API-contract facts of different strength. Do not claim the markers are mandatory, case-sensitive or parser-enforced without a current explicit contract. If the selected interface's notation or ordinal mapping is unverified, mark it unresolved before calling the binding ready. Do not generalize these spellings to other providers.
+
+## Performance comparison
+
+When the brief calls for different responses across sequential character shots, complete and compare every row. Distinct intent/action, gesture, eyeline and timing are required; name-swapped copies fail this manual review. Do not manufacture different reactions when the brief deliberately asks for synchronized or matching behavior; record that intention instead.
+
+| Shot and subject mapping | Intent / response and visible action | Gesture | Eyeline target/direction | Action onset, peak and resolution in source time | Planned retained source window / corresponding edit beat | Shared mood and continuity locks |
+| --- | --- | --- | --- | --- | --- | --- |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+Preserve shared mood, axis, setting and state continuity while directing individual responses. Timing includes pace and the response's relation to the preceding beat. Put the essential action and readable reaction inside the retained window, not just in discarded setup or tail footage. Label windows as planned until real media exists; use the [source/edit coordinate contract](../PLANNING.md) and verify the retained performance and actual seam at normal speed after generation.
+
+## Audit disposition
+
+- Overall audit decision: `pass`, `revise` or `unverified`. Record the existing `reference_readiness`, `bindings` and `performance` checks as `pass`, `fail` or `unverified` (the prompt gate requires `pass` for these checks), with concrete evidence and unresolved items. Link this completed record in the existing audit evidence; do not add unsupported schema keys or treat a metadata gate as semantic validation.
+- Compare exact prompt bytes, settings, ordered media IDs/roles and source versions with the reviewed payload immediately before submission. Any payload change invalidates the previous audit for the new submission, even if the prompt text is unchanged. Preserve prior history and create a new immutable attempt with a fresh audit; update the prompt version when its bytes change.
+- Keep observed defects separate from cause hypotheses. Alias wording alone does not establish why an earlier model output failed. Record uncertainty and supporting/counter-evidence rather than assigning an unsupported cause.

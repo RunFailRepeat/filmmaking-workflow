@@ -10,6 +10,8 @@ Submitted brief ID/version/hash and reference versions:
 
 Inspect the exact prepared prompt, ordered references and actual supported payload. Check the approved brief, identity/wardrobe/location/prop/ensemble readiness, binding roles, model/settings, exact dialogue and speaker order, performance/reaction, ongoing movement when requested, purposeful coverage and literal uppercase CUT at every shot transition. Keep mechanical QA checks from accidentally directing a held pose. Inspect actual reference assets; populated metadata cannot replace them. Record missing information as unresolved. Distinguish approved exploration from production-ready claims.
 
+Complete the [reference-binding and distinct-performance checklist](reference-performance-audit.md) against the actual assets, ordered provider payload and neighboring shots. Attach the completed private record as audit evidence: use the existing reference/binding/performance checks, and mark missing mapping, uncertain notation or unreviewed differences unresolved. These checks are human judgments; the schema does not parse provider reference tokens or prove visual/performance correctness.
+
 Return pass / revise / unverified, one result per schema check, specific findings and evidence. Save an `audit` record bound to the immutable attempt before any job begins, and run the prompt gate. An amended prompt/payload needs a new attempt and appropriate prompt version plus a fresh audit. Quote/transfer side effects, spending and execution permission remain separate gates.
 
 ## Result/failure checker — after output or provider failure

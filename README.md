@@ -3,6 +3,7 @@
 A reference-first planning and review kit for AI-assisted shorts. It helps define shots, preserve continuity, review actual footage and control approvals. It does not generate media or authorize spending.
 
 - [Workflow](WORKFLOW.md)
+- [Jev prompt-compliance adapter — offline preparation and synthetic routing only](JEV_AUDIT.md)
 - [Prompt auditor, independent result checker and private SQLite results store](RESULTS.md), [reviewer briefs](templates/reviewers.md) and [import schema](schemas/results.schema.json), plus [independent findings](schemas/findings.schema.json)
 - [Planning duration/coverage contracts and owner-selected workflow sources](PLANNING.md), [planning schema](schemas/plan.schema.json), [fictional plan](examples/fictional-plan.json), and [work-cycle record](templates/work-cycle.md)
 - [Content analytics definitions and exploratory timing proposal](ANALYTICS.md)

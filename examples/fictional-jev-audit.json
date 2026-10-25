@@ -1,0 +1,232 @@
+{
+  "fixture_notice": "Synthetic text and invented probabilities. Not historical production data, calibration, live access or Jev verification.",
+  "state": {
+    "repo_commit": "af664d0645641554e043e49205519c3b884dfcd5",
+    "rules": {
+      "version": "fictional-rules-v1",
+      "text": "Explicitly map subjects to ordered references using verified notation. Distinct responses require different intent/action, gesture, eyeline and timing in the retained window. Remove irrelevant named negative constraints. Keep unchanged wardrobe color in private audit notes, not redundant prompt prose.",
+      "sha256": "eeb303f840725df45b3fb1e8e40cc1ca0aa68388eccd482ded87d0158a9c5dcb"
+    },
+    "owner_corrections": {
+      "version": "fictional-correction-v2",
+      "text": "Keep approved reference wardrobe unchanged. Do not repeat its color in the prompt. Direct two different responses.",
+      "sha256": "a63e7fae592a52858353cfb55ddb7e41a79c8e7dac283f3b3a2125ac29ef4d40"
+    },
+    "brief": {
+      "version": "fictional-brief-v1",
+      "text": "Two sequential shots in a shared quiet morning mood. The courier reacts with relief; the guard responds with suspicion. Different intent/action, gesture, eyeline and timing are required. Retain source seconds 1-5 from each clip.",
+      "sha256": "046cbd924daf717b27e3b254ed8fc12d3fa974a29942d624f3b68ac45dac3641"
+    },
+    "payload": {
+      "prompt": "@image1 supplies courier identity and unchanged wardrobe. At 1-2 seconds the courier exhales with relief, opens a palm, looking down at the parcel.\nCUT\n@image2 supplies guard identity and unchanged wardrobe. At 2-4 seconds the guard leans back suspiciously, folds both arms, and looks toward the doorway. Shared quiet morning mood.",
+      "settings": {
+        "model": "fictional-generator",
+        "duration": 6
+      },
+      "medias": [
+        {
+          "role": "image",
+          "value": "11111111-1111-4111-8111-111111111111"
+        },
+        {
+          "role": "image",
+          "value": "22222222-2222-4222-8222-222222222222"
+        }
+      ]
+    },
+    "references": [
+      {
+        "subject": "courier",
+        "uuid": "11111111-1111-4111-8111-111111111111",
+        "role": "image",
+        "source_sha256": "c61439adef0ef8229dceeb773852536f1533b3a1d32c549e951a6f43e886c673",
+        "ordinal": 1,
+        "notation": "@image1",
+        "audit_description": "Courier in approved blue suit; identity and wardrobe."
+      },
+      {
+        "subject": "guard",
+        "uuid": "22222222-2222-4222-8222-222222222222",
+        "role": "image",
+        "source_sha256": "a3abed1dc0bd8ec5300b84eaa6aef4cae6a03d9a98c228b8ea57e6037587b9aa",
+        "ordinal": 2,
+        "notation": "@image2",
+        "audit_description": "Guard in approved grey uniform; identity and wardrobe."
+      }
+    ],
+    "shots": [
+      {
+        "id": "s1",
+        "subject": "courier",
+        "intent_action": "relief; exhale",
+        "gesture": "open palm",
+        "eyeline": "parcel below",
+        "timing": [
+          1,
+          2
+        ],
+        "retained_window": [
+          1,
+          5
+        ]
+      },
+      {
+        "id": "s2",
+        "subject": "guard",
+        "intent_action": "suspicion; lean back",
+        "gesture": "fold arms",
+        "eyeline": "doorway",
+        "timing": [
+          2,
+          4
+        ],
+        "retained_window": [
+          1,
+          5
+        ]
+      }
+    ]
+  },
+  "current": {
+    "repo_commit": "af664d0645641554e043e49205519c3b884dfcd5",
+    "payload_sha256": "1e4d6149763eeea5d15a429a6f4a07e5510b469b3085c42b270ee32b134a236b",
+    "references_sha256": "419afb7d065c3c26bc00e1d349abd1cbdbdf209b9669c8df92817a649be01b23",
+    "shots_sha256": "2566fd205b68ccb6459a6c1867d729222b97fafbf5435c60f90351c6392ff5cd",
+    "rules_sha256": "eeb303f840725df45b3fb1e8e40cc1ca0aa68388eccd482ded87d0158a9c5dcb",
+    "owner_corrections_sha256": "a63e7fae592a52858353cfb55ddb7e41a79c8e7dac283f3b3a2125ac29ef4d40",
+    "brief_sha256": "046cbd924daf717b27e3b254ed8fc12d3fa974a29942d624f3b68ac45dac3641"
+  },
+  "gates": {
+    "state_sha256": "9c8f92fb3958e628cb53f447f4a156e9ca5351859507d93e3ec1419515718e39",
+    "checks": {
+      "asset_bytes": "pass",
+      "cost": "pass",
+      "exact_invariants": "pass",
+      "owner_restrictions": "pass",
+      "permissions": "pass",
+      "provider_bindings": "pass",
+      "provider_notation": "pass"
+    }
+  },
+  "replay": {
+    "request_sha256": "7e8b66d31994b999883cecc92ec54b7ff9af58cb538d6bdccbdd727c010ee87b",
+    "response": {
+      "model": "jev-1.14.0",
+      "answers": {
+        "reference_mapping": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "intent_action": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "gesture": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "eyeline": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "timing": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "owner_corrections": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "wardrobe": {
+          "type": "noul",
+          "noul": 0.01
+        },
+        "irrelevant_negatives": {
+          "type": "noul",
+          "noul": 0.01
+        }
+      },
+      "usage": {
+        "input_tokens": 123,
+        "output_tokens": 8
+      }
+    }
+  },
+  "policy": {
+    "model": "jev-1.14.0",
+    "questions_sha256": "a9225f6a7e514e45a545ed2608dd0213f67bb8fe0bb76872a99bdc1320798443",
+    "rules_sha256": "eeb303f840725df45b3fb1e8e40cc1ca0aa68388eccd482ded87d0158a9c5dcb",
+    "evaluation_sha256": "f13eceab618b03705d84e77d3b4fe8ded7cbb6d213adf043f2c8cf57a3aca0f0",
+    "scope": "synthetic_routing_test_only",
+    "thresholds": {
+      "reference_mapping": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "intent_action": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "gesture": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "eyeline": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "timing": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "owner_corrections": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "wardrobe": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      },
+      "irrelevant_negatives": {
+        "review_above": 0.1,
+        "revise_at": 0.9
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "missing_reference_mapping",
+      "expected": "blocked"
+    },
+    {
+      "id": "wrong_reference_order",
+      "expected": "blocked"
+    },
+    {
+      "id": "duplicated_performances",
+      "expected": "revise",
+      "violation": "intent_action",
+      "prompt": "@image1 courier opens a palm in relief looking down at 1-2s.\nCUT\n@image2 guard opens a palm in relief looking down at 1-2s."
+    },
+    {
+      "id": "missing_latest_wardrobe_instruction",
+      "expected": "revise",
+      "violation": "owner_corrections",
+      "correction": "Use new owner-approved beach outfits: a linen shirt and shorts for the courier; a summer dress for the guard. References supply identity only."
+    },
+    {
+      "id": "stale_owner_correction",
+      "expected": "blocked"
+    },
+    {
+      "id": "redundant_unchanged_color",
+      "expected": "revise",
+      "violation": "wardrobe",
+      "append_prompt": " The courier wears the blue suit from the reference."
+    },
+    {
+      "id": "compliant",
+      "expected": "independent_review"
+    }
+  ]
+}

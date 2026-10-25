@@ -228,5 +228,99 @@
       "id": "compliant",
       "expected": "independent_review"
     }
-  ]
+  ],
+  "edit_scope_case": {
+    "id": "narrow_arrival_removal_preserves_middle",
+    "notice": "Anonymized regression derived from an edit-scope failure. No footage inspected; source identifier/hash and probabilities are synthetic. Frame numbers reproduce the requested boundaries, modeled as half-open [start,end).",
+    "owner_correction": "Remove only the game-like rear arrival of the courier. Restore the courier and guard approved looks. Do not remove the other middle shots. Keep the protected middle, then the new closeups, with the courier last. If the target identity is ambiguous, stop for independent identification rather than expanding deletion.",
+    "approved_target": {
+      "description": "game-like rear courier arrival",
+      "source_id": "fictional-source-v1",
+      "source_sha256": "cdb349b03291cc28e89c06eb0586d39233d01c1dc28f9c74bdc6f8d1ae6ca492",
+      "frame_interval": [
+        513,
+        585
+      ]
+    },
+    "protected_beats": [
+      {
+        "description": "other middle shots",
+        "source_id": "fictional-source-v1",
+        "frame_interval": [
+          585,
+          1320
+        ]
+      }
+    ],
+    "required_sequence": [
+      "retained_middle",
+      "new_closeups",
+      "courier_last"
+    ],
+    "variants": [
+      {
+        "id": "overbroad_middle_deletion",
+        "target_identity": "confirmed",
+        "removed_frames": [
+          [
+            513,
+            1320
+          ]
+        ],
+        "retained_frames": [],
+        "sequence": [
+          "new_closeups",
+          "courier_last"
+        ],
+        "synthetic_violation_probability": 0.01,
+        "expected": "blocked"
+      },
+      {
+        "id": "ambiguous_arrival_identity",
+        "target_identity": "unresolved",
+        "removed_frames": [
+          [
+            513,
+            585
+          ]
+        ],
+        "retained_frames": [
+          [
+            585,
+            1320
+          ]
+        ],
+        "sequence": [
+          "retained_middle",
+          "new_closeups",
+          "courier_last"
+        ],
+        "synthetic_violation_probability": 0.5,
+        "expected": "blocked"
+      },
+      {
+        "id": "corrected_narrow_removal",
+        "target_identity": "confirmed",
+        "removed_frames": [
+          [
+            513,
+            585
+          ]
+        ],
+        "retained_frames": [
+          [
+            585,
+            1320
+          ]
+        ],
+        "sequence": [
+          "retained_middle",
+          "new_closeups",
+          "courier_last"
+        ],
+        "synthetic_violation_probability": 0.01,
+        "expected": "independent_review"
+      }
+    ]
+  }
 }

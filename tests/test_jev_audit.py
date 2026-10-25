@@ -47,6 +47,47 @@ class JevAuditChecks(unittest.TestCase):
                 self.assertFalse(result['execution_allowed'])
                 self.assertTrue(result['independent_review_required'])
 
+    def test_narrow_edit_scope_keeps_protected_middle(self):
+        case = fixture()['edit_scope_case']
+        self.assertEqual(case['approved_target']['frame_interval'], [513, 585])
+        self.assertEqual(case['protected_beats'][0]['frame_interval'], [585, 1320])
+        for variant in case['variants']:
+            with self.subTest(variant=variant['id']):
+                b = fixture(); state = b['state']
+                state['owner_corrections']['version'] = 'fictional-edit-correction-v3'
+                state['owner_corrections']['text'] = case['owner_correction']
+                # Include target identity, actual boundary numbers and protected beats in
+                # the model-visible state; no ability to identify unseen footage is implied.
+                state['brief']['text'] = json.dumps({k: case[k] for k in
+                    ('approved_target', 'protected_beats', 'required_sequence')}, sort_keys=True)
+                proposal = {k: variant[k] for k in
+                    ('target_identity', 'removed_frames', 'retained_frames', 'sequence')}
+                state['payload']['settings']['edit_scope'] = proposal
+                # Synthetic new-closeup plan ends on the arrival character.
+                state['shots'].reverse()
+                state['payload']['prompt'] = (
+                    'Reference roles: @image1 courier identity/approved look; '
+                    '@image2 guard identity/approved look. Restore both approved looks. '
+                    'Proposed edit with source-frame boundaries: ' + json.dumps(proposal, sort_keys=True))
+                reseal(b)
+                # External deterministic gate example, deliberately independent of Jev.
+                # This only compares this fixture plan; it is not an implemented editor.
+                exact = (proposal['removed_frames'] == [case['approved_target']['frame_interval']]
+                         and proposal['retained_frames'] == [x['frame_interval'] for x in case['protected_beats']]
+                         and proposal['sequence'] == case['required_sequence'])
+                b['gates']['checks']['exact_invariants'] = 'pass' if exact else 'fail'
+                b['gates']['checks']['owner_restrictions'] = (
+                    'pass' if proposal['target_identity'] == 'confirmed' else 'unverified')
+                b['replay']['response']['answers']['owner_corrections']['noul'] = variant['synthetic_violation_probability']
+                request = build_request(state, b['current'])
+                self.assertIn('protected_beats', request['state']['brief']['text'])
+                self.assertEqual(request['state']['payload']['settings']['edit_scope'], proposal)
+                result = run(b)
+                self.assertEqual(result['route'], variant['expected'])
+                self.assertFalse(result['execution_allowed'])
+                self.assertFalse(result['jev_verified'])
+                self.assertTrue(result['independent_review_required'])
+
     def test_fictional_prompts_preserve_existing_cut_invariant(self):
         b = fixture()
         prompts = [b["state"]["payload"]["prompt"]] + [c["prompt"] for c in b["cases"] if "prompt" in c]

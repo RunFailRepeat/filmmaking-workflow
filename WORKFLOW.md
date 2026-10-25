@@ -18,6 +18,8 @@ For new identity references, prefer a clean background without labels or competi
 
 For character sheets, record the current user-approved output contract: each requested view type and count, total panels, and allowed versus must-preserve identity, wardrobe, style and composition details. Reference images supply approved source information; their composition does not override explicit output instructions. Before submission, compare the exact final prompt and payload against the current user brief, including the view-count total and permitted changes. Do not add portraits, panels, percentages or geometric layout details unless needed and specified in the brief. Keep project-specific layouts in the project packet; there is no universal character-sheet panel count. This is a human preflight check, not an implemented layout validator.
 
+For every generated subject, explicitly map its reference role to the actual ordered provider attachment and identify the subject through supported reference notation and a clear role in the prompt. Keep visual identity anchors in the private audit; include them in generation prose only where needed to resolve ambiguity. When an attached approved reference already defines unchanged wardrobe, do not redundantly describe its color: bind the reference and direct the new action/performance. Explicitly describe intentional owner-approved wardrobe changes, such as new beach outfits, and scope the reference to the identity or other roles being preserved so old clothing is not accidentally retained. This is not a universal ban on visual descriptions. Internal character names are aliases, not assumed model knowledge. API UUID binding and model-visible reference notation are separate; reconcile both using the [reference and performance audit](templates/reference-performance-audit.md). Use provider/version-specific primary examples or contracts, with their evidence limits. Remove irrelevant named negative constraints when that character/reference is absent from the shot; this is not a blanket ban on names.
+
 ## 3. Plan shots and transitions
 
 Apply the [voice, camera and finishing gates](CONTINUITY.md). Audition voices per film; approve each character's exact user-heard take/source version as well as provider/ID/type, accent, pronunciation and delivery. No automatic voice reuse or assumed preset/image voice preservation. Keep exact dialogue per line.
@@ -29,6 +31,8 @@ Also specify framing, focus/depth of field and reshoot continuity. Lens/focal-le
 Give every shot a purpose, source duration, usable edit range, start/action/end, camera side, screen direction and sound. Carry momentum, pose, eyelines, object states and support contacts across cuts. Distinguish simultaneous coverage from sequential story time: two angles of one event do not double its story duration.
 
 Separate director intent from mechanical QA. Describe the performance, reaction, pace and purpose of each angle. When requested, begin with natural movement already in progress and preserve its momentum; a start-state description need not be a held opening pose. Keep per-foot/contact inspection details in review notes unless an essential physical constraint must appear in the prompt. Do not turn those checks into a pause or rigid pose that changes the intended performance. Actual playback must establish whether the movement and reaction work.
+
+When a creative brief calls for different responses in sequential character shots, distinct intent/action, gesture, eyeline and timing are mandatory. Compare the shots side by side: swapping names in one copied performance prompt is insufficient. Preserve shared mood and continuity while giving each character its own response. Plan the important performance to land inside the retained edit window and verify it in actual playback; action that exists only in discarded handles does not satisfy the beat. Use the [comparison table](templates/reference-performance-audit.md#performance-comparison) before auditing.
 
 Use separate coverage when a complicated contact cannot be judged clearly. Multishot scenes are acceptable when geometry and timing remain manageable.
 
@@ -52,7 +56,9 @@ Prompt approval is separate from spending and execution approval. Record bounded
 
 Before any paid generation, obtain a live dated quote for the exact payload, show its expiry/uncertainty and request explicit spending authorization. Keep an immutable ledger of source versions, payload hashes, job IDs, settings and outputs; append corrections instead of overwriting past submissions.
 
-Do not attribute a model failure to prompt length or valid references without evidence. There is no universal prompt-length limit in this workflow. A comparison testing shorter wording must hold model, action, references, duration and settings constant; distinguish observed results from hypotheses.
+Any change to the exact prompt or payload, including reference order, UUID, role or settings, invalidates its prior audit for the revised submission. Preserve the old attempt and audit as history; create a new immutable attempt and fresh audit before execution.
+
+Do not attribute a model failure to prompt length, alias usage or valid references without evidence. There is no universal prompt-length limit in this workflow. A comparison testing shorter wording must hold model, action, references, duration and settings constant; distinguish observed results from hypotheses.
 
 ## 5. Generate only authorized work
 
